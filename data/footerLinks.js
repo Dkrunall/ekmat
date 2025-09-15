@@ -3,26 +3,22 @@ export const menuItems = [
     title: "Company",
     delay: "0.2s",
     links: [
-      { name: "About", href: "/about" },
-      { name: "Courses", href: "/course-grid-basic" },
-      { name: "Instructor", href: "/instructor-list" },
-      { name: "Events", href: "/event-list" },
-      { name: "Become a teacher", href: "/become-teacher" },
+      { name: "Home", href: "/" },
+      { name: "About", href: "#about-section" },
+      { name: "Testimonials", href: "#testimonials-section" },
+      { name: "Contact us", href: "/contact" },
     ],
   },
   {
     title: "Useful Links",
     delay: "0.3s",
     links: [
-      { name: "Testimonials", href: "#" },
-      { name: "Pricing", href: "/pricing" },
-      { name: "FAQs", href: "/faq" },
-      { name: "Help Center", href: "/help-center" },
       { name: "Terms", href: "/terms" },
       { name: "Sitemap", href: "#" },
       { name: "Privacy", href: "#" },
     ],
   },
+  /* Hidden "Popular Categories" section as per user request
   {
     title: "Popular Categories",
     delay: "0.4s",
@@ -37,11 +33,15 @@ export const menuItems = [
       { name: "Music", href: "/categories" },
     ],
   },
+  */
 ];
 
 export const socialLinks = [
-  { icon: "flaticon-facebook-1", href: "#" },
+  { icon: "flaticon-facebook-1", href: "https://www.facebook.com/share/171R9Nk5Ej/" },
   { icon: "icon-twitter", href: "#" },
-  { icon: "flaticon-instagram", href: "#" },
-  { icon: "flaticon-linkedin-1", href: "#" },
+  { icon: "flaticon-instagram", href: "https://www.instagram.com/ekmatgyanjyoti" },
+  { icon: "flaticon-linkedin-1", href: "https://www.linkedin.com/company/ekmatgyanyoti/" },
+  { icon: "icon-play", href: "https://youtube.com/@ekmatgyanjyoti" },
+  { icon: "flaticon-send", href: "https://t.me/ekmatgyanjyotic" },
+  { icon: "flaticon-mobile-phone", href: "https://wa.me/919009045554" },
 ];

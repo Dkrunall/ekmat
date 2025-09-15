@@ -1518,16 +1518,16 @@ instructors-item
     align-items: center;
 
     .agent-img-item {
-      height: 50px;
-      width: 50px;
-      border: 1px solid var(--Secondary);
-      border-radius: 50px;
-      padding: 4px;
-      background-color: var(--White);
+      height: 45px;
+      width: 45px;
+      border: none;
+      border-radius: 45px;
+      padding: 0;
+      background-color: transparent;
     }
 
     .agent-img-item:not(:first-child) {
-      margin-left: -9px;
+      margin-left: -5px;
     }
   }
 
@@ -1559,6 +1559,44 @@ instructors-item
       font-size: 14px;
       background-color: var(--Secondary);
       border: 4px solid var(--White);
+    }
+  }
+}
+
+// Responsive styles for box-agent on mobile
+@media (max-width: 768px) {
+  .box-agent {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 10px;
+    
+    .agent-img-list {
+      margin-left: 0 !important;
+      
+      .agent-img-item {
+        height: 40px;
+        width: 40px;
+        border-radius: 40px;
+        border: none;
+      }
+      
+      .agent-img-item:not(:first-child) {
+        margin-left: -3px !important;
+      }
+    }
+    
+    .rate {
+      padding-top: 0 !important;
+      
+      .ratings {
+        i {
+          font-size: 8px;
+        }
+      }
+      
+      .number-rate {
+        font-size: 13px;
+      }
     }
   }
 }

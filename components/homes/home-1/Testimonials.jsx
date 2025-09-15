@@ -1,6 +1,5 @@
 "use client";
 
-import { avatars, testimonials } from "@/data/testimonials";
 import { useState } from "react";
 import { Navigation, Thumbs } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -123,6 +122,45 @@ export default function Testimonials({
     },
   ];
 
+  // Avatar images using local r1.jpg to r5.jpg
+  const avatars = [
+    {
+      id: 1,
+      src: "/r1.jpg",
+      alt: "Rahul Sharma - Software Engineer",
+      width: 240,
+      height: 241,
+    },
+    {
+      id: 2,
+      src: "/r2.jpg",
+      alt: "Priya Patel - Data Scientist",
+      width: 240,
+      height: 241,
+    },
+    {
+      id: 3,
+      src: "/r3.jpg",
+      alt: "Amit Kumar - UX Designer",
+      width: 240,
+      height: 241,
+    },
+    {
+      id: 4,
+      src: "/r4.jpg",
+      alt: "Sneha Reddy - Marketing Manager",
+      width: 240,
+      height: 241,
+    },
+    {
+      id: 5,
+      src: "/r5.jpg",
+      alt: "Vikram Singh - College Student",
+      width: 240,
+      height: 241,
+    },
+  ];
+
   return (
     <section className={`${parentClass}`}>
       <div className="tf-container">
@@ -178,13 +216,14 @@ export default function Testimonials({
               >
                 {avatars.map((avatar, index) => (
                   <SwiperSlide key={index} className="swiper-slide">
-                    {/* Student avatar - In a production environment, these should be replaced with CDN images from Vedantu */}
+                    {/* Student avatar - Using local images r1.jpg to r5.jpg */}
                     <Image
-                      className="lazyload testimonials-thumb-image"
+                      className="lazyload testimonials-thumb-image rounded-full"
                       src={avatar.src}
                       alt={`${avatar.alt} - Ekmat Gyan Jyoti Student Success Story`}
                       width={avatar.width}
                       height={avatar.height}
+                      style={{ objectFit: 'cover' }}
                     />
                   </SwiperSlide>
                 ))}

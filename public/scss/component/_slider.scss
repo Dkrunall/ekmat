@@ -142,11 +142,23 @@
         }
         
         img {
-            height: 80px;
-            border-radius: 30px;
-            opacity: 0.4;
+            height: 120px;
+            width: 120px;
+            border-radius: 50%;
+            opacity: 1;
+            object-fit: cover;
         }
         
+    }
+    
+    // Responsive styles for mobile devices
+    @media (max-width: 768px) {
+        .swiper-slide {
+            img {
+                height: 100px;
+                width: 100px;
+            }
+        }
     }
     .widget-saying-button{
         width: 35px;

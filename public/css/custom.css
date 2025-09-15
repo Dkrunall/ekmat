@@ -1,0 +1,75 @@
+/* Custom CSS to fix image stretching and ensure proper rounding */
+
+/* Fix for hero image */
+.page-title-home1 .image .rounded-image {
+  border-radius: 20px;
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
+/* Fix for agent images to ensure they are properly rounded and not stretched */
+.page-title-home1 .agent-img-item img,
+.page-title-home1 .agent-img-item .ls-is-cached.lazyloaded.rounded-full {
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  width: 45px !important;
+  height: 45px !important;
+  min-width: 45px !important;
+  min-height: 45px !important;
+  max-width: 45px !important;
+  max-height: 45px !important;
+  aspect-ratio: 1/1 !important;
+  border: none !important;
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 768px) {
+  .page-title-home1 .agent-img-item .ls-is-cached.lazyloaded.rounded-full {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    max-width: 40px !important;
+    max-height: 40px !important;
+    border: none !important;
+  }
+}
+
+/* Fix for testimonial avatars to ensure they are properly rounded and not stretched */
+.gallery .swiper-slide img {
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  width: 120px !important;
+  height: 120px !important;
+  min-width: 120px !important;
+  min-height: 120px !important;
+  max-width: 120px !important;
+  max-height: 120px !important;
+  aspect-ratio: 1/1 !important;
+  opacity: 1 !important;
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 768px) {
+  .gallery .swiper-slide img {
+    width: 100px !important;
+    height: 100px !important;
+    min-width: 100px !important;
+    min-height: 100px !important;
+    max-width: 100px !important;
+    max-height: 100px !important;
+  }
+}
+
+/* Ensure active testimonial image is fully visible */
+.gallery .swiper-slide.swiper-slide-active img {
+  opacity: 1 !important;
+}
+
+/* Fix for previous and next testimonial images */
+.gallery .swiper-slide.swiper-slide-prev img,
+.gallery .swiper-slide.swiper-slide-next img {
+  opacity: 0.8 !important;
+}

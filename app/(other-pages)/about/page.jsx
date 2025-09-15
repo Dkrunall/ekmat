@@ -56,11 +56,15 @@ export default function page() {
         </div>
 
         <div className="main-content pt-0">
-          <About />
+          <div id="about-section">
+            <About />
+          </div>
           <Features />
           <OurVisions />
           <Facts />
-          <Testimonials parentClass="tf-spacing-5 widget-saying bg-4 page-about" />
+          <div id="testimonials-section">
+            <Testimonials parentClass="tf-spacing-5 widget-saying bg-4 page-about" />
+          </div>
           <div className="tf-spacing-5 pt-0"></div>
           <Instractors />
           <Brands />

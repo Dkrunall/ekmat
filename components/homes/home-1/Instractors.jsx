@@ -25,6 +25,16 @@ export default function Instractors() {
       },
     },
   };
+  // Updated instructor data with local images
+  const updatedInstructors = instructors.map((instructor, index) => {
+    // Use images 1-7 in rotation for instructors
+    const imageNumber = (index % 7) + 1;
+    return {
+      ...instructor,
+      imgSrc: `/${imageNumber}.jpg`
+    };
+  });
+  
   return (
     <section className="section-instructor tf-spacing-3 pt-0">
       <div className="tf-container">
@@ -52,14 +62,13 @@ export default function Instractors() {
               {...options}
               modules={[Navigation, Pagination]}
             >
-              {instructors.map((instructor, index) => (
+              {updatedInstructors.map((instructor, index) => (
                 <SwiperSlide className="swiper-slide" key={index}>
                   <div className="instructors-item hover-img style-column">
                     <div className="image-wrap">
-                      {/* Instructor image - Updated with Unsplash images of Indian professionals */}
+                      {/* Instructor image - Updated with local images */}
                       <Image
                         className="lazyload"
-                        data-src={instructor.imgSrc}
                         alt={`${instructor.name} - ${instructor.description} - Professional Online Instructor`}
                         src={instructor.imgSrc}
                         width={520}

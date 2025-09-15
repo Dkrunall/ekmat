@@ -10,12 +10,11 @@ export default function Facts() {
           <div className="col-12">
             <div className="key-wrap flex">
               <div className="key-image">
-                {/* Updated with CDN image showing diverse students engaged in online learning */}
+                {/* Updated with local image for diverse students engaged in online learning */}
                 <Image
                   className="lazyload"
-                  data-src="https://images.unsplash.com/photo-1589254065878-42c9da997008?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1370&q=80"
                   alt="Students learning online with UpSkill - Interactive education platform"
-                  src="https://images.unsplash.com/photo-1589254065878-42c9da997008?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1370&q=80"
+                  src="/5.jpg"
                   width={1370}
                   height={1301}
                 />

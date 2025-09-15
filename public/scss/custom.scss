@@ -84,8 +84,84 @@
   }
 }
 .testimonials-thumb-image {
-  width: fit-content !important;
+  width: 240px !important;
+  height: 240px !important;
 }
+
+// Fix for avatar image stretching and proper rounded styling
+.testimonials-thumb-image.rounded-square {
+  width: 240px !important;
+  height: 240px !important;
+  border-radius: 20px !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+// Fix for agent avatars to ensure proper rounded styling and prevent stretching
+.agent-img-item img,
+.page-title-home1 .agent-img-item .ls-is-cached.lazyloaded.rounded-full {
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  width: 45px !important;
+  height: 45px !important;
+  min-width: 45px !important;
+  min-height: 45px !important;
+  max-width: 45px !important;
+  max-height: 45px !important;
+  aspect-ratio: 1/1 !important;
+  border: none !important;
+}
+
+// Responsive styles for mobile devices
+@media (max-width: 768px) {
+  // Make review images bigger on mobile
+  .page-title-home1 .agent-img-item .ls-is-cached.lazyloaded.rounded-full {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    max-width: 40px !important;
+    max-height: 40px !important;
+    border: none !important;
+  }
+  
+  // Adjust the box-agent layout on mobile
+  .box-agent {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 10px;
+  }
+  
+  // Adjust the agent image list on mobile
+  .agent-img-list {
+    margin-left: 0 !important;
+  }
+  
+  .agent-img-item:not(:first-child) {
+    margin-left: -5px !important;
+  }
+  
+  // Adjust the rate section on mobile
+  .rate {
+    padding-top: 0 !important;
+  }
+}
+
+// Fix for instructor images to ensure proper styling
+.instructors-item .image-wrap img {
+  border-radius: 8px !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+// Fix for blog images to ensure proper styling
+.blog-article-item .article-thumb img {
+  border-radius: 8px !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
 .instructors-dashboard.show .dashboard-title {
   display: block !important;
 }
@@ -260,6 +336,126 @@
   border-color: #333333 !important;
 }
 
+// Contact form popup styling
+.contact-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact-popup {
+  background-color: white;
+  border-radius: 12px;
+  padding: 40px;
+  max-width: 550px;
+  width: 90%;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.contact-popup button.close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #131836;
+  font-weight: 300;
+  transition: color 0.3s ease;
+}
+
+.contact-popup button.close:hover {
+  color: #e27447;
+}
+
+.contact-popup h3 {
+  margin-bottom: 10px;
+  font-family: 'Cardo', serif;
+  font-weight: 700;
+  color: #131836;
+  font-size: 28px;
+  text-align: center;
+}
+
+.contact-popup .subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 30px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.contact-popup label {
+  display: block;
+  margin-bottom: 8px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  color: #131836;
+  font-weight: 500;
+}
+
+.contact-popup input,
+.contact-popup textarea {
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid #d8dbdd;
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.contact-popup input:focus,
+.contact-popup textarea:focus {
+  outline: none;
+  border-color: #e27447;
+  box-shadow: 0 0 0 3px rgba(226, 116, 71, 0.1);
+}
+
+.contact-popup input::placeholder,
+.contact-popup textarea::placeholder {
+  color: #aaa;
+}
+
+.contact-popup .tf-btn {
+  width: 100%;
+  padding: 15px;
+  border-radius: 8px;
+  border: none;
+  background-color: #131836;
+  color: white;
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.contact-popup .tf-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(19, 24, 54, 0.3);
+  background-color: #000000;
+}
+
+.contact-popup .form-group {
+  margin-bottom: 20px;
+}
+
 // Fix header text color
 #header_main.header .header-text {
   color: #131836 !important;
@@ -273,6 +469,27 @@
 // Fix header text color for Log In button
 .header-login .tf-button-default.header-text {
   color: #131836 !important;
+}
+
+// Mobile header fixes
+@media (max-width: 991px) {
+  #header_main.header {
+    .header-inner-wrap {
+      padding: 10px 15px !important;
+    }
+    
+    #site-logo {
+      img {
+        max-width: 100px !important;
+        height: auto !important;
+      }
+    }
+    
+    .mobile-nav-toggler {
+      padding: 5px !important;
+      margin-right: 10px !important;
+    }
+  }
 }
 
 // Footer styles to match header background

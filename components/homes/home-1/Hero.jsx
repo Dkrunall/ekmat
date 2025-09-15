@@ -59,50 +59,52 @@ export default function Hero() {
                 their careers with Ekmat Gyan Jyoti.
               </h6>
               <div className="bottom-btns">
-                <span
+                {/* Hidden "Book a Free Class" button as per user request */}
+                {/* <span
                   className="tf-btn wow fadeInUp rounded-full"
                   data-wow-delay="0.3s"
                 >
                   Book a Free Class
                   <i className="icon-arrow-top-right" />
-                </span>
-                <span
+                </span> */}
+                {/* Hidden "Explore courses" button as per user request */}
+                {/* <span
                   className="tf-btn style-third wow fadeInUp rounded-full"
                   data-wow-delay="0.4s"
                 >
                   Explore courses
                   <i className="icon-arrow-top-right" />
-                </span>
+                </span> */}
                 <div className="box-agent wow fadeInUp" data-wow-delay="0.5s">
                   <ul className="agent-img-list">
                     <li className="agent-img-item">
                       <Image
-                        className=" ls-is-cached lazyloaded"
-                        data-src="/images/avatar/user-1.png"
-                        alt="Happy Student learning online with Ekmat Gyan Jyoti platform"
-                        width={84}
-                        height={84}
-                        src="/images/avatar/user-1.png"
+                        className="ls-is-cached lazyloaded rounded-full"
+                        alt="Arjun Sharma - Successful online learner"
+                        width={45}
+                        height={45}
+                        src="/r1.jpg"
+                        style={{ objectFit: 'cover' }}
                       />
                     </li>
                     <li className="agent-img-item">
                       <Image
-                        className=" ls-is-cached lazyloaded"
-                        data-src="/images/avatar/user-2.png"
-                        alt="Successful learner achieving career goals through online education"
-                        width={84}
-                        height={84}
-                        src="/images/avatar/user-2.png"
+                        className="ls-is-cached lazyloaded rounded-full"
+                        alt="Priya Patel - Career achiever"
+                        width={45}
+                        height={45}
+                        src="/r2.jpg"
+                        style={{ objectFit: 'cover' }}
                       />
                     </li>
                     <li className="agent-img-item">
                       <Image
-                        className=" ls-is-cached lazyloaded"
-                        data-src="/images/avatar/user-3.png"
-                        alt="Career achiever who transformed their profession with Ekmat Gyan Jyoti"
-                        width={84}
-                        height={84}
-                        src="/images/avatar/user-3.png"
+                        className="ls-is-cached lazyloaded rounded-full"
+                        alt="Rahul Verma - Professional student"
+                        width={45}
+                        height={45}
+                        src="/r3.jpg"
+                        style={{ objectFit: 'cover' }}
                       />
                     </li>
                   </ul>
@@ -122,37 +124,16 @@ export default function Hero() {
           </div>
           <div className="col-lg-5">
             <div className="image">
-              {/* Main hero image - Updated with CDN image showing students in online learning environment */}
+              {/* Main hero image - Updated with local image */}
               <Image
-                className="lazyload"
-                data-src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=960&q=80"
+                className="lazyload rounded-image"
                 alt="Online Learning Platform - Students attending live interactive classes with expert instructors"
                 width={960}
                 height={1161}
-                src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=960&q=80"
+                src="/1.jpg"
+                style={{ objectFit: 'cover' }}
               />
-              {/* Decorative elements representing interactive learning features */}
-              <Image
-                className="item1 animate-cir45"
-                alt="Interactive Learning Experience - Live classes with real-time engagement"
-                width={242}
-                height={242}
-                src="/images/item/item-1.png"
-              />
-              <Image
-                className="item2 animate-dot-anim-2"
-                alt="Expert Instructors - Professional educators with industry experience"
-                width={216}
-                height={216}
-                src="/images/item/item-2.png"
-              />
-              <Image
-                className="item3 animate-dot-anim-3"
-                alt="Career Success - Students achieving their professional goals"
-                width={230}
-                height={230}
-                src="/images/item/item-3.png"
-              />
+              {/* Removed decorative floating images as per user request */}
             </div>
           </div>
         </div>
@@ -172,6 +153,7 @@ export default function Hero() {
                     src={category.src}
                     width={category.width}
                     height={category.height}
+                    style={{ objectFit: 'cover' }}
                   />
                 </div>
                 <h6>{category.title}</h6>

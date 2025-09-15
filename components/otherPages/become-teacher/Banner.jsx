@@ -35,8 +35,8 @@ export default function Banner() {
                         data-src="/images/avatar/user-1.png"
                         alt=""
                         src="/images/avatar/user-1.png"
-                        width={84}
-                        height={84}
+                        width={40}
+                        height={40}
                       />
                     </li>
                     <li className="agent-img-item">
@@ -45,8 +45,8 @@ export default function Banner() {
                         data-src="/images/avatar/user-2.png"
                         alt=""
                         src="/images/avatar/user-2.png"
-                        width={84}
-                        height={84}
+                        width={40}
+                        height={40}
                       />
                     </li>
                     <li className="agent-img-item">
@@ -55,8 +55,8 @@ export default function Banner() {
                         data-src="/images/avatar/user-3.png"
                         alt=""
                         src="/images/avatar/user-3.png"
-                        width={84}
-                        height={84}
+                        width={40}
+                        height={40}
                       />
                     </li>
                     <li className="agent-img-item">

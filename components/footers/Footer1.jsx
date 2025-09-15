@@ -34,6 +34,17 @@ export default function Footer1({ parentClass = "footer" }) {
         }
       });
   };
+
+  const handleScrollLink = (e, href) => {
+    // Check if it's an anchor link
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      const element = document.getElementById(href.substring(1));
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
   return (
     <footer id="footer" className={parentClass}>
       <div className="footer-wrap">
@@ -47,7 +58,7 @@ export default function Footer1({ parentClass = "footer" }) {
                     data-wow-delay="0s"
                   >
                     <div className="footer-logo">
-                      <Link href={`/`}>
+                      <Link href={`/`} style={{ backgroundColor: '#000000', padding: '10px', borderRadius: '4px', display: 'inline-block' }}>
                         <Image
                           alt="Company Logo"
                           src="/images/logo.png"
@@ -102,6 +113,10 @@ export default function Footer1({ parentClass = "footer" }) {
                           <li key={linkIndex}>
                             {link.href.startsWith("/") ? (
                               <Link href={link.href}>{link.name}</Link>
+                            ) : link.href.startsWith("#") ? (
+                              <a href={link.href} onClick={(e) => handleScrollLink(e, link.href)}>
+                                {link.name}
+                              </a>
                             ) : (
                               <a href={link.href}>{link.name}</a>
                             )}
@@ -156,31 +171,6 @@ export default function Footer1({ parentClass = "footer" }) {
                         </button>
                       </div>
                     </form>
-                    <h5 className="fw-5 get-app">Get the app</h5>
-                    <ul className="tf-app-download">
-                      <li>
-                        <a href="#">
-                          <div className="icon">
-                            <i className="icon-apple" />
-                          </div>
-                          <div className="app">
-                            <div>Download on the</div>
-                            <div>Apple Store</div>
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <div className="icon">
-                            <i className="icon-chplay" />
-                          </div>
-                          <div className="app">
-                            <div>Get in on</div>
-                            <div>Google Play</div>
-                          </div>
-                        </a>
-                      </li>
-                    </ul>
                   </div>
                 </div>
               </div>

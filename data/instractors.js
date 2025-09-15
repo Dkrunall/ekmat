@@ -1,7 +1,7 @@
 export const instructors = [
   {
     id: 1,
-    imgSrc: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=520&q=80",
+    imgSrc: "/1.jpg",
     alt: "Arjun Sharma - Professional Web Developer",
     students: 345,
     courses: 34,
@@ -11,7 +11,7 @@ export const instructors = [
   },
   {
     id: 2,
-    imgSrc: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=520&q=80",
+    imgSrc: "/2.jpg",
     alt: "Priya Patel - Data Science Expert",
     students: 345,
     courses: 34,
@@ -21,7 +21,7 @@ export const instructors = [
   },
   {
     id: 3,
-    imgSrc: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=520&q=80",
+    imgSrc: "/3.jpg",
     alt: "Rahul Verma - UX/UI Designer",
     students: 345,
     courses: 34,
@@ -31,7 +31,7 @@ export const instructors = [
   },
   {
     id: 4,
-    imgSrc: "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=520&q=80",
+    imgSrc: "/4.jpg",
     alt: "Anjali Mehta - Digital Marketing Specialist",
     students: 345,
     courses: 34,
@@ -41,7 +41,7 @@ export const instructors = [
   },
   {
     id: 5,
-    imgSrc: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=520&q=80",
+    imgSrc: "/5.jpg",
     alt: "Vikram Singh - Mobile App Developer",
     students: 345,
     courses: 34,
@@ -51,7 +51,7 @@ export const instructors = [
   },
   {
     id: 6,
-    imgSrc: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=520&q=80",
+    imgSrc: "/6.jpg",
     alt: "Arjun Sharma - Professional Web Developer",
     students: 345,
     courses: 34,
@@ -61,7 +61,7 @@ export const instructors = [
   },
   {
     id: 7,
-    imgSrc: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=520&q=80",
+    imgSrc: "/7.jpg",
     alt: "Priya Patel - Data Science Expert",
     students: 345,
     courses: 34,
@@ -71,7 +71,7 @@ export const instructors = [
   },
   {
     id: 8,
-    imgSrc: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=520&q=80",
+    imgSrc: "/1.jpg",
     alt: "Rahul Verma - UX/UI Designer",
     students: 345,
     courses: 34,
@@ -84,7 +84,7 @@ export const instructors = [
 export const instructors2 = [
   {
     id: 9,
-    imgSrc: "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=520&q=80",
+    imgSrc: "/2.jpg",
     students: 345,
     courses: 34,
     name: "Anjali Mehta",
@@ -92,7 +92,7 @@ export const instructors2 = [
   },
   {
     id: 10,
-    imgSrc: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=520&q=80",
+    imgSrc: "/3.jpg",
     students: 345,
     courses: 34,
     name: "Vikram Singh",
@@ -100,7 +100,7 @@ export const instructors2 = [
   },
   {
     id: 11,
-    imgSrc: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=520&q=80",
+    imgSrc: "/4.jpg",
     students: 345,
     courses: 34,
     name: "Arjun Sharma",
@@ -108,7 +108,7 @@ export const instructors2 = [
   },
   {
     id: 12,
-    imgSrc: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=520&q=80",
+    imgSrc: "/5.jpg",
     students: 345,
     courses: 34,
     name: "Priya Patel",
@@ -116,7 +116,7 @@ export const instructors2 = [
   },
   {
     id: 13,
-    imgSrc: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=520&q=80",
+    imgSrc: "/6.jpg",
     students: 345,
     courses: 34,
     name: "Rahul Verma",
@@ -124,7 +124,7 @@ export const instructors2 = [
   },
   {
     id: 14,
-    imgSrc: "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=520&q=80",
+    imgSrc: "/7.jpg",
     students: 345,
     courses: 34,
     name: "Anjali Mehta",
@@ -132,7 +132,7 @@ export const instructors2 = [
   },
   {
     id: 15,
-    imgSrc: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=520&q=80",
+    imgSrc: "/1.jpg",
     students: 345,
     courses: 34,
     name: "Vikram Singh",
@@ -140,7 +140,7 @@ export const instructors2 = [
   },
   {
     id: 16,
-    imgSrc: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=520&q=80",
+    imgSrc: "/2.jpg",
     students: 345,
     courses: 34,
     name: "Arjun Sharma",
@@ -151,35 +151,35 @@ export const instructors2 = [
 export const instructors3 = [
   {
     id: 17,
-    imgSrc: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=520&q=80",
+    imgSrc: "/3.jpg",
     name: "Priya Patel",
     role: "Teacher",
     description: "Data Scientist with expertise in Machine Learning and AI",
   },
   {
     id: 18,
-    imgSrc: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=520&q=80",
+    imgSrc: "/4.jpg",
     name: "Rahul Verma",
     role: "Teacher",
     description: "UX/UI Designer with experience at top tech companies",
   },
   {
     id: 19,
-    imgSrc: "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=520&q=80",
+    imgSrc: "/5.jpg",
     name: "Anjali Mehta",
     role: "Teacher",
     description: "Digital Marketing Expert with focus on SEO and Social Media",
   },
   {
     id: 20,
-    imgSrc: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=520&q=80",
+    imgSrc: "/6.jpg",
     name: "Vikram Singh",
     role: "Teacher",
     description: "Mobile App Developer specializing in iOS and Android",
   },
   {
     id: 21,
-    imgSrc: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=520&q=80",
+    imgSrc: "/7.jpg",
     name: "Arjun Sharma",
     role: "Teacher",
     description: "Senior Web Developer with 10+ years of experience in React and Node.js",
@@ -189,7 +189,7 @@ export const instructors3 = [
 export const instructors4 = [
   {
     id: 22,
-    imgSrc: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=520&q=80",
+    imgSrc: "/1.jpg",
     name: "Arjun Sharma",
     students: 345,
     courses: 34,
@@ -206,7 +206,7 @@ export const instructors4 = [
   },
   {
     id: 23,
-    imgSrc: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=520&q=80",
+    imgSrc: "/2.jpg",
     name: "Priya Patel",
     students: 345,
     courses: 34,
@@ -222,7 +222,7 @@ export const instructors4 = [
   },
   {
     id: 24,
-    imgSrc: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=520&q=80",
+    imgSrc: "/3.jpg",
     name: "Rahul Verma",
     students: 345,
     courses: 34,
@@ -239,7 +239,7 @@ export const instructors4 = [
   },
   {
     id: 25,
-    imgSrc: "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=520&q=80",
+    imgSrc: "/4.jpg",
     name: "Anjali Mehta",
     students: 345,
     courses: 34,
@@ -255,7 +255,7 @@ export const instructors4 = [
   },
   {
     id: 26,
-    imgSrc: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=520&q=80",
+    imgSrc: "/5.jpg",
     name: "Vikram Singh",
     students: 345,
     courses: 34,
@@ -271,7 +271,7 @@ export const instructors4 = [
   },
   {
     id: 27,
-    imgSrc: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=520&q=80",
+    imgSrc: "/6.jpg",
     name: "Arjun Sharma",
     students: 345,
     courses: 34,
@@ -288,7 +288,7 @@ export const instructors4 = [
   },
   {
     id: 28,
-    imgSrc: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=520&q=80",
+    imgSrc: "/7.jpg",
     name: "Priya Patel",
     students: 345,
     courses: 34,
@@ -305,7 +305,7 @@ export const instructors4 = [
   },
   {
     id: 29,
-    imgSrc: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=520&q=80",
+    imgSrc: "/1.jpg",
     name: "Rahul Verma",
     students: 345,
     courses: 34,
@@ -321,7 +321,7 @@ export const instructors4 = [
   },
   {
     id: 30,
-    imgSrc: "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=520&q=80",
+    imgSrc: "/2.jpg",
     name: "Anjali Mehta",
     students: 345,
     courses: 34,
@@ -336,7 +336,7 @@ export const instructors4 = [
   },
   {
     id: 31,
-    imgSrc: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=520&q=80",
+    imgSrc: "/3.jpg",
     name: "Vikram Singh",
     students: 345,
     courses: 34,

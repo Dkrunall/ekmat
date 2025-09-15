@@ -23,23 +23,28 @@ export default function HomePage1() {
   return (
     <>
       <div id="wrapper">
-        <div className="tf-top-bar flex items-center justify-center">
-          <p>Intro price. Get Ekmat Gyan Jyoti for Big Sale -95% off.</p>
-        </div>
-
+        {/* Removed top bar as per user request */}
         <Header1 />
         <Hero />
         {/* <TopCategories /> */}
         <div className="main-content pb-63">
-          <Courses />
+          {/* Hidden "Browse Our Top Courses" section as per user request */}
+          {/* <Courses /> */}
           {/* <VedantuCategories /> */}
           <Features />
           <Facts />
-          <Testimonials />
-          <Banner />
-          <Instractors />
-          <BecomeInstactor />
-          <Blogs />
+          {/* Hidden "Learn Latest Skills; Advance Your Career" section as per user request */}
+          {/* <Banner /> */}
+          {/* Hidden "Learn From The Best Instructors" section as per user request */}
+          {/* <Instractors /> */}
+          <div id="about-section">
+            <BecomeInstactor />
+          </div>
+          <div id="testimonials-section">
+            <Testimonials />
+          </div>
+          {/* Hidden blogs section as per user request */}
+          {/* <Blogs /> */}
           <Banner2 />
         </div>
         <Footer1 />

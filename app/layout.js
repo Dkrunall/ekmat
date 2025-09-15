@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import "../public/scss/main.scss";
+import "../public/css/custom.css";
 import "swiper/css/effect-fade";
 
 import { tabs } from "@/utlis/tabs";

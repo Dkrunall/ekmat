@@ -37,30 +37,27 @@ export default function BecomeInstactor() {
                   <ul className="agent-img-list">
                     <li className="agent-img-item">
                       <Image
-                        className="lazyload"
-                        data-src="/images/avatar/user-1.png"
-                        alt=""
-                        src="/images/avatar/user-1.png"
+                        className="lazyload rounded-full"
+                        alt="Arjun Sharma - Successful online instructor"
+                        src="/6.jpg"
                         width={84}
                         height={84}
                       />
                     </li>
                     <li className="agent-img-item">
                       <Image
-                        className="lazyload"
-                        data-src="/images/avatar/user-2.png"
-                        alt=""
-                        src="/images/avatar/user-2.png"
+                        className="lazyload rounded-full"
+                        alt="Priya Patel - Expert educator"
+                        src="/7.jpg"
                         width={84}
                         height={84}
                       />
                     </li>
                     <li className="agent-img-item">
                       <Image
-                        className="lazyload"
-                        data-src="/images/avatar/user-3.png"
-                        alt=""
-                        src="/images/avatar/user-3.png"
+                        className="lazyload rounded-full"
+                        alt="Rahul Verma - Professional teacher"
+                        src="/2.jpg"
                         width={84}
                         height={84}
                       />
@@ -78,15 +75,13 @@ export default function BecomeInstactor() {
               <div className="content-img">
                 <Image
                   className="lazyload item-1"
-                  data-src="https://images.unsplash.com/photo-1509062522246-375596ef7f47?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=708&q=80"
                   alt="Become an instructor and inspire students through online teaching"
-                  src="https://images.unsplash.com/photo-1509062522246-375596ef7f47?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=708&q=80"
+                  src="/3.jpg"
                   width={708}
                   height={802}
                 />
                 <Image
                   className="lazyload item-2"
-                  data-src="/images/item/item-4.png"
                   alt=""
                   src="/images/item/item-4.png"
                   width={148}
@@ -94,7 +89,6 @@ export default function BecomeInstactor() {
                 />
                 <Image
                   className="lazyload item-3"
-                  data-src="/images/item/item-20.png"
                   alt=""
                   src="/images/item/item-20.png"
                   width={128}
