@@ -8,7 +8,7 @@ export default function Features() {
           <div className="col-12">
             <div className="heading-section text-center">
               <h2 className="fw-7 font-cardo wow fadeInUp" data-wow-delay="0s">
-                Why Learn With UpSkill?
+                Why Learn With Ekmat Gyan Jyoti?
               </h2>
               <div className="sub fs-15 wow fadeInUp" data-wow-delay="0.2s">
                 Experience the future of online education with our innovative platform
