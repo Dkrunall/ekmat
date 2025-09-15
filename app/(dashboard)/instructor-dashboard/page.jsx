@@ -7,8 +7,8 @@ import React from "react";
 
 export const metadata = {
   title:
-    "Instractor Dashboard || UpSkill - Education Online Courses LMS React Nextjs Template",
-  description: "UpSkill - Education Online Courses LMS React Nextjs Template",
+    "Instructor Dashboard || Ekmat Gyan Jyoti - Online Learning Platform for Career Growth",
+  description: "Ekmat Gyan Jyoti is India's leading online education platform offering expert-led courses, live interactive sessions, and personalized learning paths to help students and professionals advance their careers.",
 };
 export default function page() {
   return (

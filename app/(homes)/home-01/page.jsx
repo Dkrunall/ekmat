@@ -16,8 +16,8 @@ import Testimonials from "@/components/homes/home-1/Testimonials";
 
 export const metadata = {
   title:
-    "Home 1 || Ekmat Gyan Jyoti - Education Online Courses LMS React Nextjs Template",
-  description: "Ekmat Gyan Jyoti - Education Online Courses LMS React Nextjs Template",
+    "Home 1 || Ekmat Gyan Jyoti - Online Learning Platform for Career Growth",
+  description: "Ekmat Gyan Jyoti is India's leading online education platform offering expert-led courses, live interactive sessions, and personalized learning paths to help students and professionals advance their careers. Join 500,000+ learners transforming their futures today.",
 };
 export default function HomePage1() {
   return (
