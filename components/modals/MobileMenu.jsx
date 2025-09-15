@@ -67,8 +67,7 @@ export default function MobileMenu() {
               >
                 {item.subItems ? (
                   <>
-                    <a
-                      href="#!"
+                    <span
                       className={`submenu-toggle collapsed ${
                         isMenuActive(item) ? "activeMenu" : ""
                       }`}
@@ -76,14 +75,13 @@ export default function MobileMenu() {
                       data-bs-target={`#menu${index}`}
                     >
                       {item.title}
-                    </a>
+                    </span>
                     <ul id={`menu${index}`} className="list-group collapse">
                       {item.subItems.map((subItem, subIndex) => (
                         <li className="list-group-item" key={subIndex}>
                           {subItem.subItems ? (
                             <>
-                              <a
-                                href="#!"
+                              <span
                                 className={`submenu-toggle collapsed  ${
                                   isMenuActive(subItem) ? "activeMenu" : ""
                                 }`}
@@ -91,7 +89,7 @@ export default function MobileMenu() {
                                 data-bs-target={`#submenu${index}-${subIndex}`}
                               >
                                 {subItem.title}
-                              </a>
+                              </span>
                               <ul
                                 id={`submenu${index}-${subIndex}`}
                                 className="list-group collapse"
@@ -102,44 +100,41 @@ export default function MobileMenu() {
                                       className="list-group-item"
                                       key={subSubIndex}
                                     >
-                                      <Link
+                                      <span
                                         className={` nav-link-mobile  ${
                                           isMenuActive(subSubItem)
                                             ? "activeMenu"
                                             : ""
                                         }`}
-                                        href={subSubItem.href}
                                       >
                                         {subSubItem.title}
-                                      </Link>
+                                      </span>
                                     </li>
                                   )
                                 )}
                               </ul>
                             </>
                           ) : (
-                            <Link
+                            <span
                               className={` nav-link-mobile  ${
                                 isMenuActive(subItem) ? "activeMenu" : ""
                               }`}
-                              href={subItem.href}
                             >
                               {subItem.title}
-                            </Link>
+                            </span>
                           )}
                         </li>
                       ))}
                     </ul>
                   </>
                 ) : (
-                  <Link
+                  <span
                     className={`nav-link-mobile   ${
                       isMenuActive(item) ? "activeMenu" : ""
                     }`}
-                    href={item.href}
                   >
                     {item.title}
-                  </Link>
+                  </span>
                 )}
               </li>
             ))}
