@@ -1,0 +1,385 @@
+.offcanvas.offcanvas-start.mobile-menu {
+  max-width: 80% !important;
+  min-width: 250px !important;
+  .offcanvas-header {
+    border-bottom: 1px solid #d8dbdd;
+    align-items: center;
+    padding: 10px 20px;
+    height: 60px;
+    color: var(--Secondary) !important;
+  }
+  .list-group-item {
+    border: none !important;
+    padding-right: 0px !important;
+    .submenu-toggle {
+      position: relative;
+      width: 100% !important;
+      display: block;
+      box-sizing: border-box;
+      padding-right: 0px !important;
+      font-size: 17px;
+      font-weight: 500;
+      margin-top: 10px;
+      &::after {
+        position: absolute;
+        font-size: 23px;
+        right: 10px;
+        font-weight: 300;
+        top: 0;
+      }
+      &.collapsed::after {
+        content: "\002B";
+      }
+      &:not(.collapsed):after {
+        content: "\2212";
+      }
+    }
+    .nav-link-mobile {
+      font-size: 16px;
+    }
+  }
+}
+
+.tf-collapse-item {
+  display: block !important;
+  overflow: hidden !important;
+
+  .tf-collapse-content {
+    transition: 0.5s;
+    overflow: hidden;
+  }
+}
+.tf-sidebar .sidebar-item .showmore-item .fl-item2 {
+  display: block !important;
+}
+.tf-sidebar .sidebar-item .showmore-item2 .fl-item3 {
+  display: block;
+}
+.tf-sidebar .sidebar-item .showmore-item3 .fl-item4 {
+  display: block;
+}
+.tfSubscribeMsg {
+  max-height: 0px;
+  transition: 0.4s;
+  overflow: hidden;
+  &.active {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    max-height: 180px;
+  }
+}
+.activeMenu {
+  color: var(--Secondary) !important;
+}
+.home-7 {
+  .parent-active {
+    &.activeMenu {
+      color: var(--Primary) !important;
+    }
+  }
+}
+.disabled-active-menu {
+  .activeMenu {
+    color: var(--Primary) !important;
+  }
+}
+.testimonials-thumb-image {
+  width: fit-content !important;
+}
+.instructors-dashboard.show .dashboard-title {
+  display: block !important;
+}
+@media (max-width: 600px) {
+  .wg-pagination {
+    gap: 5px;
+    li {
+      width: 30px;
+      min-width: 28px;
+      a {
+        width: 32px;
+        height: 32px;
+      }
+      &:first-child {
+        a {
+          width: 40px;
+          height: 40px;
+        }
+      }
+      &:last-child {
+        a {
+          width: 40px;
+          height: 40px;
+        }
+      }
+    }
+  }
+}
+.tf-sidebar .sidebar-item .showmore-item .d-none {
+  display: none !important;
+}
+
+// Custom styles for header with light orange background
+#header_main.header {
+  background-color: #FFE5D7 !important;
+  
+  .header-inner {
+    background-color: transparent !important;
+  }
+  
+  // Ensure text remains readable
+  .header-text {
+    color: #131836 !important; // Dark text for contrast
+  }
+  
+  .header-catalog {
+    > span {
+      color: #131836 !important; // Dark text for catalog/categories
+      &.header-text {
+        color: #131836 !important; // Even more specific for categories text
+      }
+    }
+  }
+  
+  .header-catalog > a {
+    color: #131836 !important; // Dark text for catalog link
+    &:hover {
+      background-color: rgba(226, 116, 71, 0.1) !important; // Light hover with orange tint
+    }
+  }
+  
+  // Style the search input
+  .header-search {
+    input {
+      background-color: white !important;
+      border: 1px solid #E4E4E7 !important;
+    }
+  }
+  
+  // Style navigation links
+  .navigation {
+    > li {
+      > a {
+        color: #131836 !important; // Dark text for nav links
+      }
+      
+      &.has-children {
+        &::after {
+          color: #131836 !important; // Dark arrow color
+        }
+      }
+    }
+  }
+}
+
+// Specific styles for style-2 header
+#header_main.header.style-2 {
+  background-color: #FFE5D7 !important;
+  box-shadow: 0px 1px 4px 0px rgba(64, 79, 104, 0.05);
+  
+  .header-inner {
+    background-color: transparent !important;
+  }
+}
+
+// Specific styles for style-3 header
+#header_main.header.type-absolute.style-3 {
+  background-color: #FFE5D7 !important;
+  
+  .header-inner {
+    background-color: transparent !important;
+  }
+}
+
+// Specific styles for style-4 header
+#header_main.header.type-absolute.style-4 {
+  background-color: #FFE5D7 !important;
+  
+  .header-inner {
+    background-color: transparent !important;
+  }
+}
+
+// Specific styles for style-5 header
+#header_main.header.type-absolute.style-2.style-5 {
+  background-color: #FFE5D7 !important;
+  
+  .header-inner {
+    background-color: transparent !important;
+  }
+}
+
+// Specific styles for style-6 header
+#header_main.header.style-2.style-4.style-6 {
+  background-color: #FFE5D7 !important;
+  
+  .header-inner {
+    background-color: transparent !important;
+  }
+}
+
+// Specific styles for style-7 header
+#header_main.header.type-absolute.style-7 {
+  background-color: #FFE5D7 !important;
+  
+  .header-inner {
+    background-color: transparent !important;
+  }
+}
+
+// Specific styles for style-8 header
+#header_main.header.style-2.style-8 {
+  background-color: #FFE5D7 !important;
+  
+  .header-inner {
+    background-color: transparent !important;
+  }
+}
+
+// Specific styles for style-9 header
+#header_main.header.type-absolute.style-2.style-8.style-9 {
+  background-color: #FFE5D7 !important;
+  
+  .header-inner {
+    background-color: transparent !important;
+  }
+}
+
+// Specific styles for style-10 header
+#header_main.header.type-absolute.style-10 {
+  background-color: #FFE5D7 !important;
+  
+  .header-inner {
+    background-color: transparent !important;
+  }
+}
+
+// Custom styles for black Sign Up button with white text
+
+.header-register .tf-button-default.black-bg:hover {
+  background-color: #333333 !important;
+  border-color: #333333 !important;
+}
+
+// Fix header text color
+#header_main.header .header-text {
+  color: #131836 !important;
+}
+
+// Specific rule for Categories text
+#header_main.header .header-catalog > span.header-text {
+  color: #131836 !important;
+}
+
+// Fix header text color for Log In button
+.header-login .tf-button-default.header-text {
+  color: #131836 !important;
+}
+
+// Footer styles to match header background
+#footer.footer {
+  background-color: #FFE5D7 !important;
+  
+  .footer-wrap {
+    background-color: transparent !important;
+  }
+  
+  .footer-bottom-wrap {
+    border-top: 1px solid rgba(19, 24, 54, 0.1) !important;
+  }
+}
+
+// Specific footer styles for different variations
+#footer.footer.style-2 {
+  background-color: #FFE5D7 !important;
+  
+  .footer-wrap {
+    background-color: transparent !important;
+  }
+  
+  .footer-bottom-wrap {
+    border-top: 1px solid rgba(19, 24, 54, 0.1) !important;
+  }
+}
+
+#footer.footer.style-3 {
+  background-color: #FFE5D7 !important;
+  
+  .footer-wrap {
+    background-color: transparent !important;
+  }
+}
+
+#footer.footer.style-4 {
+  background-color: #FFE5D7 !important;
+  margin: 0 60px !important;
+  border-top-left-radius: 32px !important;
+  border-top-right-radius: 32px !important;
+  
+  .footer-wrap {
+    background-color: transparent !important;
+  }
+  
+  .footer-bottom-wrap {
+    border-top: 1px solid rgba(19, 24, 54, 0.1) !important;
+  }
+}
+
+// Additional footer styles used in home pages
+#footer.footer.style-5 {
+  background-color: #FFE5D7 !important;
+  
+  .footer-wrap {
+    background-color: transparent !important;
+  }
+}
+
+#footer.footer.pt-66 {
+  background-color: #FFE5D7 !important;
+  
+  .footer-wrap {
+    background-color: transparent !important;
+  }
+  
+  .footer-bottom-wrap {
+    border-top: 1px solid rgba(19, 24, 54, 0.1) !important;
+  }
+}
+
+#footer.footer.has-border-top.style-4 {
+  background-color: #FFE5D7 !important;
+  margin: 0 60px !important;
+  border-top-left-radius: 32px !important;
+  border-top-right-radius: 32px !important;
+  
+  .footer-wrap {
+    background-color: transparent !important;
+  }
+  
+  .footer-bottom-wrap {
+    border-top: 1px solid rgba(19, 24, 54, 0.1) !important;
+  }
+}
+
+#footer.footer.style-3.style-6 {
+  background-color: #FFE5D7 !important;
+  
+  .footer-wrap {
+    background-color: transparent !important;
+  }
+  
+  .footer-bottom-wrap {
+    border-top: 1px solid rgba(19, 24, 54, 0.1) !important;
+  }
+}
+
+#footer.footer.ft-h7 {
+  background-color: #FFE5D7 !important;
+  
+  .footer-wrap {
+    background-color: transparent !important;
+  }
+  
+  .footer-bottom-wrap {
+    border-top: 1px solid rgba(19, 24, 54, 0.1) !important;
+  }
+}
