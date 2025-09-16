@@ -28,6 +28,8 @@ export default function BecomeInstactor() {
     };
 
     try {
+      console.log('Submitting instructor application:', data);
+      
       // First, submit the form data to your backend
       const response = await fetch('/api/instructor-application', {
         method: 'POST',
@@ -37,59 +39,34 @@ export default function BecomeInstactor() {
         body: JSON.stringify(data),
       });
 
+      console.log('Application submission response status:', response.status);
+      
+      const responseData = await response.json();
+      console.log('Application submission response data:', responseData);
+
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to submit application');
+        throw new Error(responseData.error || `Server error: ${response.status}`);
       }
 
       // After successful form submission, initiate PhonePe payment
-      initiatePhonePePayment(data);
+      if (responseData.paymentUrl) {
+        console.log('Redirecting to payment URL:', responseData.paymentUrl);
+        window.location.href = responseData.paymentUrl;
+      } else {
+        console.log('No payment URL in response, showing success message');
+        alert("Application submitted successfully! We'll contact you soon.");
+        closeTeachingForm();
+      }
     } catch (error) {
       console.error('Form submission error:', error);
-      alert(error.message || "Form submission failed. Please try again.");
+      alert(`Form submission failed: ${error.message || "Please try again."}`);
       setIsPaymentProcessing(false);
     }
   };
 
   const initiatePhonePePayment = async (userData) => {
-    // Set payment processing state
-    setIsPaymentProcessing(true);
-    
-    try {
-      // Call your backend to initiate PhonePe payment
-      const response = await fetch('/api/initiate-phonepe-payment', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          amount: 100, // 1 rupee in paise
-          userData: userData,
-          redirectUrl: `${window.location.origin}/payment-success`,
-          callbackUrl: `${window.location.origin}/api/payment-callback`
-        })
-      });
-
-      const paymentData = await response.json();
-
-      if (response.ok && paymentData.paymentUrl) {
-        // Redirect to PhonePe payment page
-        window.location.href = paymentData.paymentUrl;
-      } else {
-        throw new Error(paymentData.error || 'Payment initiation failed');
-      }
-    } catch (error) {
-      console.error('Payment initiation error:', error);
-      
-      // Handle specific error messages
-      if (error.message.includes('configuration error')) {
-        alert("Payment gateway configuration error. Please contact support to verify merchant account setup.");
-      } else {
-        alert(error.message || "Payment initiation failed. Please contact support.");
-      }
-      
-      setIsPaymentProcessing(false);
-    }
+    // This function is no longer used since payment initiation is handled in the API route
+    console.log('initiatePhonePePayment function called - this should not happen');
   };
 
   return (

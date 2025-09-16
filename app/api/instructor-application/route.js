@@ -25,6 +25,8 @@ export async function POST(request) {
       ? 'https://ekmat.vercel.app'  // Replace with your actual domain
       : 'http://localhost:3000';
     
+    console.log('Base URL for payment:', baseUrl);
+    
     const paymentResponse = await fetch(`${baseUrl}/api/initiate-phonepe-payment`, {
       method: 'POST',
       headers: {
@@ -38,7 +40,10 @@ export async function POST(request) {
       }),
     });
     
+    console.log('Payment response status:', paymentResponse.status);
+    
     const paymentData = await paymentResponse.json();
+    console.log('Payment response data:', paymentData);
     
     if (!paymentResponse.ok || !paymentData.paymentUrl) {
       console.error('Payment initiation failed:', paymentData);
@@ -59,9 +64,11 @@ export async function POST(request) {
     
   } catch (error) {
     console.error('Error processing instructor application:', error);
+    console.error('Error stack:', error.stack);
     return NextResponse.json({ 
       success: false, 
-      error: 'Failed to process application' 
+      error: 'Failed to process application',
+      details: error.message
     }, { status: 500 });
   }
 }
