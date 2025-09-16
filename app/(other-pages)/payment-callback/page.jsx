@@ -4,11 +4,6 @@ import React from 'react';
 import Header1 from "@/components/headers/Header1";
 import Footer1 from "@/components/footers/Footer1";
 
-export const metadata = {
-  title: 'Payment Processing | Ekmat Gyan Jyoti',
-  description: 'Processing your payment. Please wait...',
-};
-
 export default function PaymentCallbackPage() {
   return (
     <>
