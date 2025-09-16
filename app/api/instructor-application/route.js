@@ -9,12 +9,17 @@ export async function POST(request) {
     // In a real application, you would save this to your database
     // and send an email notification
     
-    // For now, we'll just log it and simulate a successful response
-    
     // After successful form submission, initiate PhonePe payment
-    // We'll use the direct API approach since the SDK is not working
+    // Use the proper API endpoint for production
     
-    const paymentResponse = await fetch('http://localhost:3000/api/initiate-phonepe-direct-payment', {
+    // Get the base URL for constructing proper URLs
+    const baseUrl = process.env.VERCEL_URL 
+      ? `https://${process.env.VERCEL_URL}`
+      : process.env.NODE_ENV === 'production'
+      ? 'https://ekmat.vercel.app'  // Replace with your actual domain
+      : 'http://localhost:3000';
+    
+    const paymentResponse = await fetch(`${baseUrl}/api/initiate-phonepe-payment`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -22,8 +27,8 @@ export async function POST(request) {
       body: JSON.stringify({
         amount: 100, // 1 rupee in paise
         userData: formData,
-        redirectUrl: 'http://localhost:3000/payment-success',
-        callbackUrl: 'http://localhost:3000/api/payment-callback'
+        redirectUrl: `${baseUrl}/payment-success`,
+        callbackUrl: `${baseUrl}/api/payment-callback`
       }),
     });
     
