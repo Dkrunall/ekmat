@@ -61,14 +61,29 @@ export async function GET(request) {
     console.log('- Transaction ID:', transactionId);
     console.log('- Merchant Order ID:', merchantOrderId);
     
+    // Get the base URL for constructing proper URLs
+    const baseUrl = process.env.VERCEL_URL 
+      ? `https://${process.env.VERCEL_URL}`
+      : process.env.NODE_ENV === 'production'
+      ? 'https://ekmat.vercel.app'
+      : 'http://localhost:3000';
+    
     // In a real application, you would:
     // 1. Check the payment status in your database
     // 2. Redirect to appropriate page based on status
     
     // For now, we'll redirect to a success page
-    return Response.redirect('http://localhost:3000/payment-success');
+    return Response.redirect(`${baseUrl}/payment-success`);
   } catch (error) {
     console.error('Error processing payment redirect:', error);
-    return Response.redirect('http://localhost:3000/payment-success'); // Redirect to success page anyway
+    
+    // Get the base URL for constructing proper URLs
+    const baseUrl = process.env.VERCEL_URL 
+      ? `https://${process.env.VERCEL_URL}`
+      : process.env.NODE_ENV === 'production'
+      ? 'https://ekmat.vercel.app'
+      : 'http://localhost:3000';
+    
+    return Response.redirect(`${baseUrl}/payment-success`); // Redirect to success page anyway
   }
 }

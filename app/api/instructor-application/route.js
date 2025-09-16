@@ -1,5 +1,11 @@
 import { NextResponse } from 'next/server';
 
+export async function GET() {
+  return NextResponse.json({ 
+    message: 'This endpoint only accepts POST requests for instructor applications. Please submit the form on the Become An Instructor page.'
+  }, { status: 405 });
+}
+
 export async function POST(request) {
   try {
     const formData = await request.json();

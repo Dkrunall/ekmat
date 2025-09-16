@@ -2,6 +2,12 @@ import { NextResponse } from 'next/server';
 import phonePeService from '../../../lib/services/phonepe-service';
 import { StandardCheckoutPayRequest } from 'pg-sdk-node';
 
+export async function GET() {
+  return NextResponse.json({ 
+    message: 'This endpoint only accepts POST requests for initiating PhonePe payments.'
+  }, { status: 405 });
+}
+
 export async function POST(request) {
   try {
     const { amount, userData, redirectUrl, callbackUrl } = await request.json();
