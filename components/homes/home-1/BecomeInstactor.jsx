@@ -4,6 +4,7 @@ import Image from "next/image";
 
 export default function BecomeInstactor() {
   const [isTeachingFormOpen, setIsTeachingFormOpen] = useState(false);
+  const [isPaymentProcessing, setIsPaymentProcessing] = useState(false);
 
   const openTeachingForm = () => {
     setIsTeachingFormOpen(true);
@@ -11,9 +12,10 @@ export default function BecomeInstactor() {
 
   const closeTeachingForm = () => {
     setIsTeachingFormOpen(false);
+    setIsPaymentProcessing(false);
   };
 
-  const handleTeachingFormSubmit = (e) => {
+  const handleTeachingFormSubmit = async (e) => {
     e.preventDefault();
     // Get form data
     const formData = new FormData(e.target);
@@ -25,12 +27,69 @@ export default function BecomeInstactor() {
       subjects: formData.get('subjects')
     };
 
-    // Simulate form submission (in a real app, you would send this to your backend)
-    setTimeout(() => {
-      alert("Thank you for your application! We will contact you soon.");
-      closeTeachingForm();
-      e.target.reset();
-    }, 1500);
+    try {
+      // First, submit the form data to your backend
+      const response = await fetch('/api/instructor-application', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to submit application');
+      }
+
+      // After successful form submission, initiate PhonePe payment
+      initiatePhonePePayment(data);
+    } catch (error) {
+      console.error('Form submission error:', error);
+      alert(error.message || "Form submission failed. Please try again.");
+      setIsPaymentProcessing(false);
+    }
+  };
+
+  const initiatePhonePePayment = async (userData) => {
+    // Set payment processing state
+    setIsPaymentProcessing(true);
+    
+    try {
+      // Call your backend to initiate PhonePe payment
+      const response = await fetch('/api/initiate-phonepe-payment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          amount: 100, // 1 rupee in paise
+          userData: userData,
+          redirectUrl: `${window.location.origin}/payment-success`,
+          callbackUrl: `${window.location.origin}/api/payment-callback`
+        })
+      });
+
+      const paymentData = await response.json();
+
+      if (response.ok && paymentData.paymentUrl) {
+        // Redirect to PhonePe payment page
+        window.location.href = paymentData.paymentUrl;
+      } else {
+        throw new Error(paymentData.error || 'Payment initiation failed');
+      }
+    } catch (error) {
+      console.error('Payment initiation error:', error);
+      
+      // Handle specific error messages
+      if (error.message.includes('configuration error')) {
+        alert("Payment gateway configuration error. Please contact support to verify merchant account setup.");
+      } else {
+        alert(error.message || "Payment initiation failed. Please contact support.");
+      }
+      
+      setIsPaymentProcessing(false);
+    }
   };
 
   return (
@@ -204,10 +263,25 @@ export default function BecomeInstactor() {
               <button 
                 type="submit"
                 className="tf-btn"
+                disabled={isPaymentProcessing}
               >
-                Submit Application
+                {isPaymentProcessing ? "Processing..." : "Submit Application"}
               </button>
             </form>
+            
+            {isPaymentProcessing && (
+              <div style={{ 
+                marginTop: '20px', 
+                padding: '15px', 
+                backgroundColor: '#e9f7ef', 
+                border: '1px solid #27ae60', 
+                borderRadius: '4px',
+                textAlign: 'center'
+              }}>
+                <p>Your application has been submitted successfully!</p>
+                <p>Redirecting to payment gateway to complete your registration (₹1)...</p>
+              </div>
+            )}
           </div>
         </div>
       )}

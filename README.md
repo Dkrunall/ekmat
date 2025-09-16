@@ -20,6 +20,17 @@ You can start editing the page by modifying `app/page.js`. The page auto-updates
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## PhonePe Payment Gateway Setup
+
+To enable payment functionality, you need to set up the PhonePe payment gateway:
+
+1. Complete your PhonePe Business Account verification
+2. Create a webhook in your PhonePe dashboard
+3. Get your API credentials from https://developer.phonepe.com
+4. Update the [.env.local](file:///Users/krunaldarji/Downloads/upskill/.env.local) file with your credentials
+
+For detailed instructions, see [PHONEPE_SETUP.md](PHONEPE_SETUP.md).
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
