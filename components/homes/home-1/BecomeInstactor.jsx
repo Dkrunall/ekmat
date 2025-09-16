@@ -41,6 +41,13 @@ export default function BecomeInstactor() {
 
       console.log('Application submission response status:', response.status);
       
+      // Check if the response is OK before trying to parse JSON
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Application submission error text:', errorText);
+        throw new Error(`Server error: ${response.status} - ${errorText}`);
+      }
+
       const responseData = await response.json();
       console.log('Application submission response data:', responseData);
 

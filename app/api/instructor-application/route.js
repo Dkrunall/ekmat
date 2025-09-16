@@ -27,6 +27,7 @@ export async function POST(request) {
     
     console.log('Base URL for payment:', baseUrl);
     
+    // Use a relative URL instead of absolute URL to avoid deployment issues
     const paymentResponse = await fetch(`${baseUrl}/api/initiate-phonepe-payment`, {
       method: 'POST',
       headers: {
@@ -42,10 +43,17 @@ export async function POST(request) {
     
     console.log('Payment response status:', paymentResponse.status);
     
+    // Check if the response is OK before trying to parse JSON
+    if (!paymentResponse.ok) {
+      const errorText = await paymentResponse.text();
+      console.error('Payment response error text:', errorText);
+      throw new Error(`Payment API returned ${paymentResponse.status}: ${errorText}`);
+    }
+    
     const paymentData = await paymentResponse.json();
     console.log('Payment response data:', paymentData);
     
-    if (!paymentResponse.ok || !paymentData.paymentUrl) {
+    if (!paymentData.paymentUrl) {
       console.error('Payment initiation failed:', paymentData);
       // Even if payment fails, we still want to save the application
       return NextResponse.json({ 

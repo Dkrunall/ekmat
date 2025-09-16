@@ -78,11 +78,15 @@ export async function POST(request) {
         }
         
         console.error('Payment initiation error:', response.error);
-        throw new Error(response.error);
+        return NextResponse.json({ 
+          error: response.error
+        }, { status: 500 });
       }
       
       console.error('Unknown payment initiation error');
-      throw new Error('Payment initiation failed. Please try again later.');
+      return NextResponse.json({ 
+        error: 'Payment initiation failed. Please try again later.'
+      }, { status: 500 });
     }
   } catch (error) {
     console.error('Error initiating PhonePe payment:', error);
