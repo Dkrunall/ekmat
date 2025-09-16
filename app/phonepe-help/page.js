@@ -28,16 +28,7 @@ export default function PhonePeHelpPage() {
       </div>
       
       <div style={{ marginBottom: '20px' }}>
-        <h3>1. Verify Your Credentials</h3>
-        <p>Visit the following pages to check your credentials:</p>
-        <ul>
-          <li><a href="/test-credentials" style={{ color: '#007bff' }}>/test-credentials</a> - Check if credentials are set</li>
-          <li><a href="/verify-credentials" style={{ color: '#007bff' }}>/verify-credentials</a> - Verify credential format</li>
-        </ul>
-      </div>
-      
-      <div style={{ marginBottom: '20px' }}>
-        <h3>2. Where to Find Your Real Credentials</h3>
+        <h3>1. Where to Find Your Real Credentials</h3>
         <p>In your PhonePe Business Dashboard, look for:</p>
         <ul>
           <li><strong>Merchant ID:</strong> Usually in the "Business Profile" or "Account Information" section</li>
@@ -47,7 +38,7 @@ export default function PhonePeHelpPage() {
       </div>
       
       <div style={{ marginBottom: '20px' }}>
-        <h3>3. Common Credential Issues</h3>
+        <h3>2. Common Credential Issues</h3>
         <ul>
           <li>Using test merchant IDs instead of live ones</li>
           <li>Using placeholder values like "YOUR_MERCHANT_ID_FROM_DASHBOARD"</li>
@@ -57,25 +48,14 @@ export default function PhonePeHelpPage() {
       </div>
       
       <div style={{ marginBottom: '20px' }}>
-        <h3>4. Webhook Configuration</h3>
+        <h3>3. Webhook Configuration</h3>
         <p><strong>Your ngrok URL:</strong> https://06d831075ba1.ngrok-free.app/</p>
         <p><strong>Webhook URL:</strong> https://06d831075ba1.ngrok-free.app/api/payment-callback</p>
         <p><strong>Redirect URL:</strong> https://06d831075ba1.ngrok-free.app/payment-success</p>
-        
-        <p><strong>Testing Webhook:</strong></p>
-        <pre style={{ backgroundColor: '#f5f5f5', padding: '10px', borderRadius: '4px' }}>
-          {`# Test GET request
-curl https://06d831075ba1.ngrok-free.app/api/test-webhook
-
-# Test POST request
-curl -X POST https://06d831075ba1.ngrok-free.app/api/test-webhook \\
--H "Content-Type: application/json" \\
--d '{"test": "data"}'`}
-        </pre>
       </div>
       
       <div style={{ marginBottom: '20px' }}>
-        <h3>5. Environment Variables</h3>
+        <h3>4. Environment Variables</h3>
         <p>Current values in your [.env.local](file:///Users/krunaldarji/Downloads/upskill/.env.local) file:</p>
         <ul>
           <li>PHONEPE_MERCHANT_ID: {process.env.PHONEPE_MERCHANT_ID ? `***${process.env.PHONEPE_MERCHANT_ID.slice(-4)}` : 'Not set'}</li>
