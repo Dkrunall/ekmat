@@ -27,7 +27,8 @@ export default function page() {
       <div className="main-content pt-0">
         <Academic />
         <About />
-        <Facts />
+        {/* Hidden "Join More Than 1 Million Learners Worldwide" section as per user request */}
+        {/* <Facts /> */}
         <Courses titleFont="" />
         <CampusLife />
         <div className="section-saying-h9 tf-spacing-8 pt-0"></div>

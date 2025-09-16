@@ -336,6 +336,126 @@
   border-color: #333333 !important;
 }
 
+// Teaching Form Popup Styles
+.teaching-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.teaching-popup {
+  background-color: white;
+  border-radius: 12px;
+  padding: 40px;
+  max-width: 550px;
+  width: 90%;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.teaching-popup button.close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #131836;
+  font-weight: 300;
+  transition: color 0.3s ease;
+}
+
+.teaching-popup button.close:hover {
+  color: #e27447;
+}
+
+.teaching-popup h3 {
+  margin-bottom: 10px;
+  font-family: 'Cardo', serif;
+  font-weight: 700;
+  color: #131836;
+  font-size: 28px;
+  text-align: center;
+}
+
+.teaching-popup .subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 30px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.teaching-popup label {
+  display: block;
+  margin-bottom: 8px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  color: #131836;
+  font-weight: 500;
+}
+
+.teaching-popup input,
+.teaching-popup textarea {
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid #d8dbdd;
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.teaching-popup input:focus,
+.teaching-popup textarea:focus {
+  outline: none;
+  border-color: #e27447;
+  box-shadow: 0 0 0 3px rgba(226, 116, 71, 0.1);
+}
+
+.teaching-popup input::placeholder,
+.teaching-popup textarea::placeholder {
+  color: #aaa;
+}
+
+.teaching-popup .tf-btn {
+  width: 100%;
+  padding: 15px;
+  border-radius: 8px;
+  border: none;
+  background-color: #131836;
+  color: white;
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.teaching-popup .tf-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(19, 24, 54, 0.3);
+  background-color: #000000;
+}
+
+.teaching-popup .form-group {
+  margin-bottom: 20px;
+}
+
 // Contact form popup styling
 .contact-popup-overlay {
   position: fixed;

@@ -13,6 +13,21 @@ import BackToTop from "@/components/common/BackToTop";
 
 export default function RootLayout({ children }) {
   const pathname = usePathname();
+  
+  useEffect(() => {
+    // Add favicon dynamically
+    const link = document.createElement('link');
+    link.rel = 'icon';
+    link.href = '/images/logo.png';
+    link.type = 'image/png';
+    document.head.appendChild(link);
+    
+    // Cleanup function to remove the link when component unmounts
+    return () => {
+      document.head.removeChild(link);
+    };
+  }, []);
+  
   useEffect(() => {
     if (typeof window !== "undefined") {
       // Import the script only on the client side

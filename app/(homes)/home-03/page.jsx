@@ -33,7 +33,8 @@ export default function page() {
           <Brands />
           <Courses />
           <GetStarted />
-          <Facts />
+          {/* Hidden "Join More Than 1 Million Learners Worldwide" section as per user request */}
+          {/* <Facts /> */}
           <Instractor />
           <Events />
           <Banner />

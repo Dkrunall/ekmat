@@ -4,7 +4,11 @@ export const metadata = {
   title:
     "Ekmat Gyan Jyoti - Online Learning Platform for Career Growth",
   description: "Ekmat Gyan Jyoti is India's leading online education platform offering expert-led courses, live interactive sessions, and personalized learning paths to help students and professionals advance their careers. Join 500,000+ learners transforming their futures today.",
+  icons: {
+    icon: '/images/logo.png',
+  },
 };
+
 export default function Home() {
   return (
     <>

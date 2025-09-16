@@ -1,6 +1,38 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Image from "next/image";
+
 export default function BecomeInstactor() {
+  const [isTeachingFormOpen, setIsTeachingFormOpen] = useState(false);
+
+  const openTeachingForm = () => {
+    setIsTeachingFormOpen(true);
+  };
+
+  const closeTeachingForm = () => {
+    setIsTeachingFormOpen(false);
+  };
+
+  const handleTeachingFormSubmit = (e) => {
+    e.preventDefault();
+    // Get form data
+    const formData = new FormData(e.target);
+    const data = {
+      fullName: formData.get('fullName'),
+      email: formData.get('email'),
+      phone: formData.get('phone'),
+      experience: formData.get('experience'),
+      subjects: formData.get('subjects')
+    };
+
+    // Simulate form submission (in a real app, you would send this to your backend)
+    setTimeout(() => {
+      alert("Thank you for your application! We will contact you soon.");
+      closeTeachingForm();
+      e.target.reset();
+    }, 1500);
+  };
+
   return (
     <section
       className="section-become-instructor tf-spacing-3 pt-0 wow fadeInUp"
@@ -14,7 +46,7 @@ export default function BecomeInstactor() {
                 <h2 className="font-cardo fw-7">Become An Instructor</h2>
                 <p className="fs-15">
                   Top instructors from around the world teach millions of
-                  students on UpSkill. We provide the tools and skills to teach
+                  students on Ekmat Gyan Jyoti. We provide the tools and skills to teach
                   what you love
                 </p>
                 <ul className="wrap-list-text-check1">
@@ -66,10 +98,21 @@ export default function BecomeInstactor() {
                       <p>1M+</p>
                     </li>
                   </ul>
-                  <span className="tf-btn">
+                  {/* Start Teaching Today Button */}
+                  <button 
+                    className="tf-btn style-secondary rounded-full"
+                    onClick={openTeachingForm}
+                    style={{ 
+                      borderRadius: '30px',
+                      padding: '10px 20px',
+                      fontSize: '14px',
+                      border: 'none',
+                      cursor: 'pointer'
+                    }}
+                  >
                     Start Teaching Today
                     <i className="icon-arrow-top-right" />
-                  </span>
+                  </button>
                 </div>
               </div>
               <div className="content-img">
@@ -99,6 +142,75 @@ export default function BecomeInstactor() {
           </div>
         </div>
       </div>
+
+      {/* Start Teaching Form Popup */}
+      {isTeachingFormOpen && (
+        <div className="teaching-popup-overlay">
+          <div className="teaching-popup">
+            <button 
+              onClick={closeTeachingForm}
+              className="close"
+            >
+              &times;
+            </button>
+            <h3>Start Teaching Today</h3>
+            <p className="subtitle">Join our platform and share your knowledge with thousands of students worldwide.</p>
+            <form onSubmit={handleTeachingFormSubmit}>
+              <div className="form-group">
+                <input 
+                  type="text" 
+                  id="fullName" 
+                  name="fullName" 
+                  placeholder="Full Name"
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <input 
+                  type="email" 
+                  id="email" 
+                  name="email" 
+                  placeholder="Email Address"
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <input 
+                  type="tel" 
+                  id="phone" 
+                  name="phone" 
+                  placeholder="Phone Number"
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <textarea 
+                  id="experience" 
+                  name="experience" 
+                  rows="4"
+                  placeholder="Teaching Experience"
+                  required
+                ></textarea>
+              </div>
+              <div className="form-group">
+                <textarea 
+                  id="subjects" 
+                  name="subjects" 
+                  rows="3"
+                  placeholder="Subjects You Want to Teach"
+                  required
+                ></textarea>
+              </div>
+              <button 
+                type="submit"
+                className="tf-btn"
+              >
+                Submit Application
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

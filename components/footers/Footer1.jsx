@@ -70,25 +70,29 @@ export default function Footer1({ parentClass = "footer" }) {
                     <ul className="address">
                       <li className="flex gap-10 items-center">
                         <div className="icon">
+                          <i className="flaticon-location" />
+                        </div>
+                        <p>
+                          305 Shree Vardhan Complex, Indore, Madhya Pradesh
+                        </p>
+                      </li>
+                      <li className="flex gap-10 items-center">
+                        <div className="icon">
+                          <i className="flaticon-user" />
+                        </div>
+                        <p>Uma Choudhary</p>
+                      </li>
+                      <li className="flex gap-10 items-center">
+                        <div className="icon">
                           <i className="flaticon-call" />
                         </div>
-                        <p>+1 (555) 123-4567</p>
+                        <p>0731-4087302</p>
                       </li>
                       <li className="flex gap-10 items-center">
                         <div className="icon">
                           <i className="flaticon-mail-1" />
                         </div>
-                        <p>support@upskill.com</p>
-                      </li>
-                      <li className="flex gap-10 items-center">
-                        <div className="icon">
-                          <i className="flaticon-location" />
-                        </div>
-                        <p>
-                          58 Howard Street #2 San
-                          <br />
-                          Francisco
-                        </p>
+                        <p>support@ekmatgyanjyoti.com</p>
                       </li>
                     </ul>
                     <ul className="tf-social-icon flex items-center gap-10">
@@ -182,7 +186,7 @@ export default function Footer1({ parentClass = "footer" }) {
             <div className="row">
               <div className="col-12">
                 <div className="footer-bottom-wrap flex justify-center items-center">
-                  <p>©&nbsp;2024&nbsp;All Rights Reserved</p>
+                  <p>© Ekmat Gyan Jyoti 2025 — All rights reserved</p>
                 </div>
               </div>
             </div>

@@ -35,7 +35,8 @@ export default function page() {
           <Features />
 
           <Courses2 />
-          <Facts />
+          {/* Hidden "Join More Than 1 Million Learners Worldwide" section as per user request */}
+          {/* <Facts /> */}
           <Events />
           <BecomeInstractor />
           <Skills />

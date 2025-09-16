@@ -59,7 +59,8 @@ export default function page() {
         <div className="main-content pt-0">
           <Features />
           <Process />
-          <Facts />
+          {/* Hidden "Join More Than 1 Million Learners Worldwide" section as per user request */}
+          {/* <Facts /> */}
           <Testimonials parentClass="tf-spacing-5 pt-0 widget-saying bg-4 bg-white" />
           <Banner />
         </div>

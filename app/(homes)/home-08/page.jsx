@@ -33,7 +33,8 @@ export default function page() {
         <div className="main-content pt-0">
           <Languages />
           <GetStarted />
-          <Facts />
+          {/* Hidden "Join More Than 1 Million Learners Worldwide" section as per user request */}
+          {/* <Facts /> */}
           <Courses />
           <Testimonials />
           <Teachers />

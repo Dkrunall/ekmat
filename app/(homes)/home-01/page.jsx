@@ -1,12 +1,10 @@
 import Footer1 from "@/components/footers/Footer1";
 import Header1 from "@/components/headers/Header1";
 import Banner from "@/components/homes/home-1/Banner";
-import Banner2 from "@/components/homes/home-1/Banner2";
 import BecomeInstactor from "@/components/homes/home-1/BecomeInstactor";
 import Blogs from "@/components/homes/home-1/Blogs";
 import Brands from "@/components/common/Brands";
 import Courses from "@/components/common/Courses";
-import Facts from "@/components/homes/home-1/Facts";
 import Features from "@/components/homes/home-1/Features";
 import Hero from "@/components/homes/home-1/Hero";
 import Instractors from "@/components/homes/home-1/Instractors";
@@ -32,7 +30,8 @@ export default function HomePage1() {
           {/* <Courses /> */}
           {/* <VedantuCategories /> */}
           <Features />
-          <Facts />
+          {/* Hidden "Join More Than 1 Million Learners Worldwide" section as per user request */}
+          {/* <Facts /> */}
           {/* Hidden "Learn Latest Skills; Advance Your Career" section as per user request */}
           {/* <Banner /> */}
           {/* Hidden "Learn From The Best Instructors" section as per user request */}
@@ -45,7 +44,8 @@ export default function HomePage1() {
           </div>
           {/* Hidden blogs section as per user request */}
           {/* <Blogs /> */}
-          <Banner2 />
+          {/* Hidden "Join More Than 1 Million Learners Worldwide" section as per user request */}
+          {/* <Banner2 /> */}
         </div>
         <Footer1 />
       </div>
