@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import Header1 from "@/components/headers/Header1";
 import Footer1 from "@/components/footers/Footer1";
@@ -25,15 +27,15 @@ export default function PaymentCallbackPage() {
                   padding: '30px'
                 }}>
                   <div className="processing-icon" style={{ marginBottom: '25px' }}>
-                    <i className="icon-refresh" style={{ fontSize: '5rem', color: '#3498db', animation: 'spin 2s linear infinite' }}></i>
+                    <i className="icon-refresh" style={{ fontSize: '5rem', color: '#3498db' }}></i>
                   </div>
                   <h1 className="font-cardo fw-7" style={{ fontSize: '2.8rem', marginBottom: '20px', textAlign: 'center' }}>
                     Processing Payment...
                   </h1>
-                  <p className="fs-18" style={{ marginBottom: '15px', color: '#555', textAlign: 'center', maxWidth: '700px', fontSize: '1.1rem' }}>
+                  <p className="fs-18" style={{ marginBottom: '15px', color: '#555', textAlign: 'center', maxWidth: '700px', fontSize: '1.3rem', lineHeight: '1.6' }}>
                     Please wait while we process your payment. This may take a few moments.
                   </p>
-                  <p className="fs-16" style={{ marginBottom: '25px', color: '#777', textAlign: 'center', maxWidth: '700px', fontSize: '1rem' }}>
+                  <p className="fs-16" style={{ marginBottom: '25px', color: '#777', textAlign: 'center', maxWidth: '700px', fontSize: '1.2rem', lineHeight: '1.6' }}>
                     You will be redirected automatically once the payment is confirmed.
                   </p>
                 </div>
@@ -47,6 +49,9 @@ export default function PaymentCallbackPage() {
         @keyframes spin {
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
+        }
+        .processing-icon {
+          animation: spin 2s linear infinite;
         }
       `}</style>
     </>
