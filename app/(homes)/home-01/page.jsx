@@ -11,16 +11,20 @@ import Instractors from "@/components/homes/home-1/Instractors";
 import Testimonials from "@/components/homes/home-1/Testimonials";
 // import TopCategories from "@/components/homes/home-1/TopCategories";
 // import VedantuCategories from "@/components/homes/home-1/VedantuCategories";
+import PopupWrapper from "@/components/common/PopupWrapper"; // Import the popup wrapper
 
 export const metadata = {
   title:
     "Home 1 || Ekmat Gyan Jyoti - Online Learning Platform for Career Growth",
   description: "Ekmat Gyan Jyoti is India's leading online education platform offering expert-led courses, live interactive sessions, and personalized learning paths to help students and professionals advance their careers. Join 500,000+ learners transforming their futures today.",
 };
+
 export default function HomePage1() {
   return (
     <>
       <div id="wrapper">
+        {/* Show popup only on home page */}
+        <PopupWrapper isHomePage={true} />
         {/* Removed top bar as per user request */}
         <Header1 />
         <Hero />

@@ -42,6 +42,40 @@ export default function Header1() {
         </div>
       </div>
       <SimpleMobileNav />
+      
+      <style jsx>{`
+        .dropdown:hover .dropdown-menu {
+          display: block;
+        }
+        
+        .dropdown-menu {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          z-index: 1000;
+          display: none;
+          background-color: white;
+          min-width: 160px;
+          box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+          padding: 10px 0;
+          border-radius: 4px;
+        }
+        
+        .dropdown-menu.show {
+          display: block;
+        }
+        
+        .dropdown-menu a {
+          display: block;
+          padding: 8px 16px;
+          text-decoration: none;
+          color: #333;
+        }
+        
+        .dropdown-menu a:hover {
+          background-color: #f8f9fa;
+        }
+      `}</style>
     </header>
   );
 }

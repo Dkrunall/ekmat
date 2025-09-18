@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import phonePeService from '@/lib/services/phonepe-service';
 
 export async function GET() {
   return NextResponse.json({ 
@@ -15,59 +16,61 @@ export async function POST(request) {
     // In a real application, you would save this to your database
     // and send an email notification
     
-    // After successful form submission, initiate PhonePe payment
-    // Use the proper API endpoint for production
+    // Generate a unique merchant order ID
+    const merchantOrderId = `MO_${Date.now()}_${Math.floor(Math.random() * 10000)}`;
     
-    // Get the base URL for constructing proper URLs
-    const baseUrl = process.env.VERCEL_URL 
-      ? `https://${process.env.VERCEL_URL}`
-      : process.env.NODE_ENV === 'production'
-      ? 'https://ekmat.vercel.app'  // Replace with your actual domain
-      : 'http://localhost:3000';
+    // Prepare payment data according to V2 documentation
+    const paymentData = {
+      merchantOrderId: merchantOrderId,
+      amount: 100, // 1 Rupee in paise
+      paymentFlow: {
+        type: "PG_CHECKOUT",
+        merchantUrls: {
+          redirectUrl: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/payment-success`
+        }
+      }
+    };
     
-    console.log('Base URL for payment:', baseUrl);
+    console.log('Initiating PhonePe payment with data:', JSON.stringify(paymentData, null, 2));
     
-    // Use a relative URL instead of absolute URL to avoid deployment issues
-    const paymentResponse = await fetch(`${baseUrl}/api/initiate-phonepe-payment`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        amount: 100, // 1 rupee in paise
-        userData: formData,
-        redirectUrl: `${baseUrl}/payment-success`,
-        callbackUrl: `${baseUrl}/api/payment-callback`
-      }),
-    });
+    // Initiate PhonePe payment
+    const paymentResponse = await phonePeService.initiatePayment(paymentData);
     
-    console.log('Payment response status:', paymentResponse.status);
-    
-    // Check if the response is OK before trying to parse JSON
-    if (!paymentResponse.ok) {
-      const errorText = await paymentResponse.text();
-      console.error('Payment response error text:', errorText);
-      throw new Error(`Payment API returned ${paymentResponse.status}: ${errorText}`);
+    if (!paymentResponse.success) {
+      console.error('PhonePe payment initiation failed:', paymentResponse);
+      
+      // If it's an authentication error, provide more specific information
+      if (paymentResponse.type === 'UnauthorizedAccess') {
+        return NextResponse.json({ 
+          success: false, 
+          error: 'Payment gateway authentication failed',
+          details: 'There was an issue authenticating with the payment gateway. Please contact support.',
+          errorCode: paymentResponse.errorCode,
+          errorMessage: paymentResponse.errorMessage
+        }, { status: 500 });
+      }
+      
+      throw new Error(`Payment initiation failed: ${paymentResponse.error}`);
     }
     
-    const paymentData = await paymentResponse.json();
-    console.log('Payment response data:', paymentData);
+    // Extract payment URL from response
+    let paymentUrl = '';
+    if (paymentResponse.data && paymentResponse.data.redirectUrl) {
+      paymentUrl = paymentResponse.data.redirectUrl;
+    } else if (paymentResponse.data && paymentResponse.data.payload && paymentResponse.data.payload.url) {
+      paymentUrl = paymentResponse.data.payload.url;
+    }
     
-    if (!paymentData.paymentUrl) {
-      console.error('Payment initiation failed:', paymentData);
-      // Even if payment fails, we still want to save the application
-      return NextResponse.json({ 
-        success: true, 
-        message: 'Application submitted successfully. However, there was an issue initiating the payment. Please contact support.',
-        paymentError: paymentData.error || 'Payment initiation failed'
-      });
+    console.log('Payment URL:', paymentUrl);
+    
+    if (!paymentUrl) {
+      throw new Error('Payment URL not found in response');
     }
     
     return NextResponse.json({ 
       success: true, 
       message: 'Application submitted successfully',
-      paymentUrl: paymentData.paymentUrl,
-      merchantOrderId: paymentData.merchantOrderId
+      paymentUrl: paymentUrl
     });
     
   } catch (error) {

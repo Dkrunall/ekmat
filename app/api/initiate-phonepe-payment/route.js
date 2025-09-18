@@ -12,7 +12,11 @@ export async function POST(request) {
   try {
     const { amount, userData, redirectUrl, callbackUrl } = await request.json();
     
-    console.log('Payment initiation request received:', { amount, redirectUrl, callbackUrl });
+    console.log('=== Payment initiation request received ===');
+    console.log('Amount:', amount);
+    console.log('Redirect URL:', redirectUrl);
+    console.log('Callback URL:', callbackUrl);
+    console.log('User Data:', JSON.stringify(userData, null, 2));
     
     // Validate the amount (should be 100 paise = 1 rupee as per requirement)
     if (amount !== 100) {
@@ -23,10 +27,11 @@ export async function POST(request) {
     }
     
     // Check if required environment variables are set
-    console.log('Environment variables check:');
+    console.log('=== Environment variables check ===');
     console.log('- PHONEPE_MERCHANT_ID:', process.env.PHONEPE_MERCHANT_ID ? 'SET' : 'NOT SET');
     console.log('- PHONEPE_CLIENT_ID:', process.env.PHONEPE_CLIENT_ID ? 'SET' : 'NOT SET');
     console.log('- PHONEPE_CLIENT_SECRET:', process.env.PHONEPE_CLIENT_SECRET ? 'SET' : 'NOT SET');
+    console.log('- NODE_ENV:', process.env.NODE_ENV || 'NOT SET');
     
     if (!process.env.PHONEPE_MERCHANT_ID || !process.env.PHONEPE_CLIENT_ID || !process.env.PHONEPE_CLIENT_SECRET) {
       console.log('Missing required environment variables');
@@ -40,19 +45,30 @@ export async function POST(request) {
     console.log('Generated merchant order ID:', merchantOrderId);
     
     // Prepare payment request data using the SDK builder
+    console.log('=== Building payment request ===');
     const payRequestBuilder = StandardCheckoutPayRequest.builder()
       .merchantOrderId(merchantOrderId)
       .amount(amount) // 100 paise = 1 rupee
       .redirectUrl(redirectUrl || 'http://localhost:3000/payment-success');
     
-    // Note: Callback URL is configured in the PhonePe dashboard, not in the request
-    // The callbackUrl parameter is used for server-side notification configuration
-    
     const payRequest = payRequestBuilder.build();
-    console.log('Payment request built successfully');
+    console.log('Payment request built successfully:', JSON.stringify(payRequest, null, 2));
+    
+    // Check if PhonePe service is properly initialized
+    if (!phonePeService.client) {
+      console.error('PhonePe service not properly initialized');
+      return NextResponse.json({ 
+        error: 'Payment gateway is not properly initialized. Please check the service configuration.' 
+      }, { status: 500 });
+    }
+    
+    // Log the environment being used
+    console.log('=== Environment Information ===');
+    console.log('Current environment:', process.env.NODE_ENV || 'development');
+    console.log('Using PhonePe SDK in', process.env.NODE_ENV === 'production' ? 'PRODUCTION' : 'SANDBOX', 'mode');
     
     // Initiate payment using our PhonePe service
-    console.log('Initiating payment with PhonePe service...');
+    console.log('=== Initiating payment with PhonePe service ===');
     const response = await phonePeService.initiatePayment(payRequest);
     
     console.log('PhonePe API response:', JSON.stringify(response, null, 2));
@@ -89,6 +105,7 @@ export async function POST(request) {
       }, { status: 500 });
     }
   } catch (error) {
+    console.error('=== ERROR in payment initiation ===');
     console.error('Error initiating PhonePe payment:', error);
     console.error('Error stack:', error.stack);
     

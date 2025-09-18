@@ -6,6 +6,7 @@ import React, { useState } from "react";
 export default function SimpleNav() {
   const pathname = usePathname();
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
+  const [isCareersDropdownOpen, setIsCareersDropdownOpen] = useState(false);
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -20,6 +21,14 @@ export default function SimpleNav() {
 
   const closeContactForm = () => {
     setIsContactFormOpen(false);
+  };
+
+  const toggleCareersDropdown = () => {
+    setIsCareersDropdownOpen(!isCareersDropdownOpen);
+  };
+
+  const closeCareersDropdown = () => {
+    setIsCareersDropdownOpen(false);
   };
 
   return (
@@ -59,6 +68,63 @@ export default function SimpleNav() {
         }}>
           Testimonials
         </Link>
+      </li>
+      {/* Careers Dropdown */}
+      <li 
+        className={`dropdown ${isCareersDropdownOpen ? 'show' : ''}`}
+        onMouseEnter={() => setIsCareersDropdownOpen(true)}
+        onMouseLeave={() => setIsCareersDropdownOpen(false)}
+      >
+        <span 
+          onClick={toggleCareersDropdown}
+          style={{ cursor: 'pointer' }}
+        >
+          Careers
+        </span>
+        <ul 
+          className={`dropdown-menu ${isCareersDropdownOpen ? 'show' : ''}`}
+          style={{
+            position: 'absolute',
+            top: '100%',
+            left: 0,
+            zIndex: 1000,
+            display: isCareersDropdownOpen ? 'block' : 'none',
+            backgroundColor: 'white',
+            minWidth: '160px',
+            boxShadow: '0 8px 16px rgba(0,0,0,0.2)',
+            padding: '10px 0',
+            borderRadius: '4px'
+          }}
+        >
+          <li>
+            <Link 
+              href="/field-executive" 
+              onClick={closeCareersDropdown}
+              style={{
+                display: 'block',
+                padding: '8px 16px',
+                textDecoration: 'none',
+                color: '#333'
+              }}
+            >
+              Field Executive
+            </Link>
+          </li>
+          <li>
+            <Link 
+              href="/teachers" 
+              onClick={closeCareersDropdown}
+              style={{
+                display: 'block',
+                padding: '8px 16px',
+                textDecoration: 'none',
+                color: '#333'
+              }}
+            >
+              Teachers
+            </Link>
+          </li>
+        </ul>
       </li>
       <li>
         <span onClick={openContactForm} style={{ cursor: 'pointer' }}>

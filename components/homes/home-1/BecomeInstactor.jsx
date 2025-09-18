@@ -51,7 +51,11 @@ export default function BecomeInstactor() {
       const responseData = await response.json();
       console.log('Application submission response data:', responseData);
 
-      if (!response.ok) {
+      if (!responseData.success) {
+        // Handle specific error cases
+        if (responseData.error === 'Payment gateway authentication failed') {
+          throw new Error(`Payment gateway issue: ${responseData.details}`);
+        }
         throw new Error(responseData.error || `Server error: ${response.status}`);
       }
 
