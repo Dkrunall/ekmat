@@ -1,11 +1,11 @@
 "use client";
 import Footer1 from "@/components/footers/Footer1";
 import Header1 from "@/components/headers/Header1";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from 'next/navigation';
 
-export default function PaymentSuccessPage() {
+function PaymentSuccessContent() {
   const searchParams = useSearchParams();
   const [applicationData, setApplicationData] = useState(null);
   const [emailSent, setEmailSent] = useState(false);
@@ -298,5 +298,13 @@ export default function PaymentSuccessPage() {
         <Footer1 parentClass="footer has-border-top" />
       </div>
     </>
+  );
+}
+
+export default function PaymentSuccessPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <PaymentSuccessContent />
+    </Suspense>
   );
 }
