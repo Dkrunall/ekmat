@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import phonePeService from '@/lib/services/phonepe-service';
 
 export async function GET() {
   return NextResponse.json({ 
@@ -20,7 +19,7 @@ export async function POST(request) {
     const merchantOrderId = `MO_${Date.now()}_${Math.floor(Math.random() * 10000)}`;
     
     // Prepare payment data according to V2 documentation
-    const paymentData = {
+    const paymentRequestData = {
       merchantOrderId: merchantOrderId,
       amount: 100, // 1 Rupee in paise
       paymentFlow: {
@@ -31,41 +30,35 @@ export async function POST(request) {
       }
     };
     
-    console.log('Initiating PhonePe payment with data:', JSON.stringify(paymentData, null, 2));
+    console.log('Initiating PhonePe payment with data:', JSON.stringify(paymentRequestData, null, 2));
     
-    // Initiate PhonePe payment
-    const paymentResponse = await phonePeService.initiatePayment(paymentData);
+    // Call the phonepe-payment API directly
+    const paymentResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/phonepe-payment`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ formData }),
+    });
     
-    if (!paymentResponse.success) {
-      console.error('PhonePe payment initiation failed:', paymentResponse);
+    if (!paymentResponse.ok) {
+      const errorData = await paymentResponse.json();
+      console.error('PhonePe payment initiation failed:', errorData);
       
-      // If it's an authentication error, provide more specific information
-      if (paymentResponse.type === 'UnauthorizedAccess') {
-        return NextResponse.json({ 
-          success: false, 
-          error: 'Payment gateway authentication failed',
-          details: 'There was an issue authenticating with the payment gateway. Please contact support.',
-          errorCode: paymentResponse.errorCode,
-          errorMessage: paymentResponse.errorMessage
-        }, { status: 500 });
-      }
-      
-      throw new Error(`Payment initiation failed: ${paymentResponse.error}`);
+      return NextResponse.json({ 
+        success: false, 
+        error: 'Payment gateway authentication failed',
+        details: errorData.error || 'There was an issue with the payment gateway. Please contact support.',
+      }, { status: 500 });
     }
     
-    // Extract payment URL from response
-    let paymentUrl = '';
-    if (paymentResponse.data && paymentResponse.data.redirectUrl) {
-      paymentUrl = paymentResponse.data.redirectUrl;
-    } else if (paymentResponse.data && paymentResponse.data.payload && paymentResponse.data.payload.url) {
-      paymentUrl = paymentResponse.data.payload.url;
-    }
+    const paymentData = await paymentResponse.json();
     
-    console.log('Payment URL:', paymentUrl);
-    
-    if (!paymentUrl) {
+    if (!paymentData.success || !paymentData.paymentUrl) {
       throw new Error('Payment URL not found in response');
     }
+    
+    const paymentUrl = paymentData.paymentUrl;
     
     return NextResponse.json({ 
       success: true, 
