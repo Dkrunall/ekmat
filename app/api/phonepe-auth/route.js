@@ -1,23 +1,17 @@
 import { NextResponse } from 'next/server';
 
-export async function GET() {
+export async function POST() {
   try {
     const clientId = process.env.PHONEPE_CLIENT_ID;
     const clientSecret = process.env.PHONEPE_CLIENT_SECRET;
     const clientVersion = process.env.PHONEPE_CLIENT_VERSION || '1';
     const environment = process.env.PHONEPE_ENV || 'production';
 
-    console.log('Testing PhonePe Configuration:');
-    console.log('Client ID:', clientId);
-    console.log('Environment:', environment);
-    console.log('Client Version:', clientVersion);
-
     if (!clientId || !clientSecret) {
-      return NextResponse.json({
-        success: false,
-        error: 'PhonePe credentials not configured',
-        config: { clientId: !!clientId, clientSecret: !!clientSecret, environment }
-      });
+      return NextResponse.json(
+        { error: 'PhonePe credentials not configured' },
+        { status: 500 }
+      );
     }
 
     // Use appropriate URL based on environment
@@ -25,15 +19,13 @@ export async function GET() {
       ? 'https://api.phonepe.com/apis/identity-manager/v1/oauth/token'
       : 'https://api-preprod.phonepe.com/apis/pg-sandbox/v1/oauth/token';
 
-    console.log('Auth URL:', authUrl);
-
     const formData = new URLSearchParams();
     formData.append('client_id', clientId);
     formData.append('client_secret', clientSecret);
     formData.append('client_version', clientVersion);
     formData.append('grant_type', 'client_credentials');
 
-    console.log('Making request to PhonePe...');
+    console.log('Requesting PhonePe auth token...');
     
     const response = await fetch(authUrl, {
       method: 'POST',
@@ -44,27 +36,28 @@ export async function GET() {
     });
 
     const responseData = await response.json();
-    console.log('PhonePe Response Status:', response.status);
-    console.log('PhonePe Response:', responseData);
 
+    if (!response.ok) {
+      console.error('PhonePe auth error:', responseData);
+      return NextResponse.json(
+        { error: 'Failed to authenticate with PhonePe', details: responseData },
+        { status: response.status }
+      );
+    }
+
+    console.log('PhonePe auth successful');
+    
     return NextResponse.json({
-      success: response.ok,
-      status: response.status,
-      config: {
-        environment,
-        authUrl,
-        clientId,
-        hasClientSecret: !!clientSecret
-      },
-      response: responseData
+      success: true,
+      accessToken: responseData.access_token,
+      tokenType: responseData.token_type,
+      expiresIn: responseData.expires_in,
     });
-
   } catch (error) {
-    console.error('Test error:', error);
-    return NextResponse.json({
-      success: false,
-      error: error.message,
-      stack: error.stack
-    }, { status: 500 });
+    console.error('Error in PhonePe authentication:', error);
+    return NextResponse.json(
+      { error: 'Internal server error', message: error.message },
+      { status: 500 }
+    );
   }
 }

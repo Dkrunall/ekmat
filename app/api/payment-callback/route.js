@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import phonePeService from '../../../lib/services/phonepe-service';
 
 export async function POST(request) {
   try {
@@ -32,10 +31,36 @@ export async function POST(request) {
     
     // For now, we'll just log the information
     
-    // If the payment was successful, you might want to save this information
+    // If the payment was successful, send confirmation email
     if (state === 'COMPLETED') {
       console.log('Payment completed successfully');
-      // Update database, send confirmation, etc.
+      
+      try {
+        // Send email notification
+        const emailResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/send-email`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            formData: callbackData.formData || {},
+            paymentDetails: {
+              transactionId,
+              merchantOrderId,
+              amount: '150',
+              status: 'Completed'
+            }
+          }),
+        });
+        
+        if (emailResponse.ok) {
+          console.log('Confirmation email sent successfully');
+        } else {
+          console.error('Failed to send confirmation email');
+        }
+      } catch (emailError) {
+        console.error('Error sending confirmation email:', emailError);
+      }
     } else {
       console.log('Payment not completed, status:', state);
     }
@@ -65,10 +90,16 @@ export async function GET(request) {
     // 1. Check the payment status in your database
     // 2. Redirect to appropriate page based on status
     
-    // For now, we'll redirect to a success page
-    return Response.redirect('http://localhost:3000/payment-success');
+    // Redirect based on payment status
+    if (transactionId && merchantOrderId) {
+      // Redirect to success page with transaction details
+      return Response.redirect(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/payment-success?transactionId=${transactionId}&merchantOrderId=${merchantOrderId}`);
+    } else {
+      // Redirect to success page anyway
+      return Response.redirect(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/payment-success`);
+    }
   } catch (error) {
     console.error('Error processing payment redirect:', error);
-    return Response.redirect('http://localhost:3000/payment-success'); // Redirect to success page anyway
+    return Response.redirect(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/payment-success`); // Redirect to success page anyway
   }
 }

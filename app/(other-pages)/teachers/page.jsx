@@ -1,10 +1,83 @@
 "use client";
 import Footer1 from "@/components/footers/Footer1";
 import Header1 from "@/components/headers/Header1";
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 
 export default function TeachersPage() {
+  const [formData, setFormData] = useState({
+    fullName: '',
+    nationality: '',
+    fatherName: '',
+    motherName: '',
+    dob: '',
+    age: '',
+    aadhaar: '',
+    gender: '',
+    maritalStatus: '',
+    category: '',
+    email: ''
+  });
+  
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitMessage('');
+
+    try {
+      // Validate required fields
+      const requiredFields = ['fullName', 'nationality', 'fatherName', 'motherName', 'dob', 'age', 'aadhaar', 'gender', 'maritalStatus', 'category'];
+      const missingFields = requiredFields.filter(field => !formData[field]);
+      
+      if (missingFields.length > 0) {
+        setSubmitMessage('Please fill in all required fields.');
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Initiate PhonePe payment
+      const paymentResponse = await fetch('/api/phonepe-payment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ formData }),
+      });
+
+      const paymentData = await paymentResponse.json();
+
+      if (paymentData.success && paymentData.paymentUrl) {
+        // Store form data in localStorage for after payment
+        localStorage.setItem('teacherApplicationData', JSON.stringify({
+          formData,
+          merchantOrderId: paymentData.merchantOrderId,
+          transactionId: paymentData.transactionId
+        }));
+        
+        // Redirect to PhonePe payment page
+        window.location.href = paymentData.paymentUrl;
+      } else {
+        setSubmitMessage('Failed to initiate payment. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitMessage('An error occurred. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <>
       <style jsx>{`
@@ -205,7 +278,7 @@ export default function TeachersPage() {
               <div className="col-lg-6 col-md-12">
                 <div className="form-section">
                   <h3 className="mb-4">Apply for Teacher Position</h3>
-                  <form>
+                  <form onSubmit={handleSubmit}>
                     <h4 className="mb-3">1) Basic Details</h4>
                     
                     <div className="form-group mb-3">
@@ -214,7 +287,21 @@ export default function TeachersPage() {
                         id="fullName" 
                         name="fullName" 
                         placeholder="Full Name *"
+                        value={formData.fullName}
+                        onChange={handleInputChange}
                         required
+                        style={{ width: '100%', padding: '12px', borderRadius: '4px', border: '1px solid #ccc', fontFamily: "'Outfit', sans-serif" }}
+                      />
+                    </div>
+                    
+                    <div className="form-group mb-3">
+                      <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="Email Address (Optional)"
+                        value={formData.email}
+                        onChange={handleInputChange}
                         style={{ width: '100%', padding: '12px', borderRadius: '4px', border: '1px solid #ccc', fontFamily: "'Outfit', sans-serif" }}
                       />
                     </div>
@@ -225,6 +312,8 @@ export default function TeachersPage() {
                         id="nationality" 
                         name="nationality" 
                         placeholder="Nationality *"
+                        value={formData.nationality}
+                        onChange={handleInputChange}
                         required
                         style={{ width: '100%', padding: '12px', borderRadius: '4px', border: '1px solid #ccc', fontFamily: "'Outfit', sans-serif" }}
                       />
@@ -236,6 +325,8 @@ export default function TeachersPage() {
                         id="fatherName" 
                         name="fatherName" 
                         placeholder="Father's Name *"
+                        value={formData.fatherName}
+                        onChange={handleInputChange}
                         required
                         style={{ width: '100%', padding: '12px', borderRadius: '4px', border: '1px solid #ccc', fontFamily: "'Outfit', sans-serif" }}
                       />
@@ -247,6 +338,8 @@ export default function TeachersPage() {
                         id="motherName" 
                         name="motherName" 
                         placeholder="Mother's Name *"
+                        value={formData.motherName}
+                        onChange={handleInputChange}
                         required
                         style={{ width: '100%', padding: '12px', borderRadius: '4px', border: '1px solid #ccc', fontFamily: "'Outfit', sans-serif" }}
                       />
@@ -258,6 +351,8 @@ export default function TeachersPage() {
                         id="dob" 
                         name="dob" 
                         placeholder="Date of Birth (Format: DD/MM/YYYY) *"
+                        value={formData.dob}
+                        onChange={handleInputChange}
                         required
                         style={{ width: '100%', padding: '12px', borderRadius: '4px', border: '1px solid #ccc', fontFamily: "'Outfit', sans-serif" }}
                       />
@@ -269,6 +364,8 @@ export default function TeachersPage() {
                         id="age" 
                         name="age" 
                         placeholder="Age as on 01/01/2025 *"
+                        value={formData.age}
+                        onChange={handleInputChange}
                         required
                         style={{ width: '100%', padding: '12px', borderRadius: '4px', border: '1px solid #ccc', fontFamily: "'Outfit', sans-serif" }}
                       />
@@ -280,6 +377,8 @@ export default function TeachersPage() {
                         id="aadhaar" 
                         name="aadhaar" 
                         placeholder="Aadhaar Number *"
+                        value={formData.aadhaar}
+                        onChange={handleInputChange}
                         required
                         style={{ width: '100%', padding: '12px', borderRadius: '4px', border: '1px solid #ccc', fontFamily: "'Outfit', sans-serif" }}
                       />
@@ -289,6 +388,8 @@ export default function TeachersPage() {
                       <select 
                         id="gender" 
                         name="gender" 
+                        value={formData.gender}
+                        onChange={handleInputChange}
                         required
                         style={{ width: '100%', padding: '12px', borderRadius: '4px', border: '1px solid #ccc', fontFamily: "'Outfit', sans-serif" }}
                       >
@@ -303,6 +404,8 @@ export default function TeachersPage() {
                       <select 
                         id="maritalStatus" 
                         name="maritalStatus" 
+                        value={formData.maritalStatus}
+                        onChange={handleInputChange}
                         required
                         style={{ width: '100%', padding: '12px', borderRadius: '4px', border: '1px solid #ccc', fontFamily: "'Outfit', sans-serif" }}
                       >
@@ -318,6 +421,8 @@ export default function TeachersPage() {
                       <select 
                         id="category" 
                         name="category" 
+                        value={formData.category}
+                        onChange={handleInputChange}
                         required
                         style={{ width: '100%', padding: '12px', borderRadius: '4px', border: '1px solid #ccc', fontFamily: "'Outfit', sans-serif" }}
                       >
@@ -330,11 +435,26 @@ export default function TeachersPage() {
                       </select>
                     </div>
                     
+                    {submitMessage && (
+                      <div className="mb-3" style={{ 
+                        padding: '10px', 
+                        borderRadius: '4px', 
+                        backgroundColor: submitMessage.includes('error') || submitMessage.includes('Failed') ? '#f8d7da' : '#d4edda',
+                        color: submitMessage.includes('error') || submitMessage.includes('Failed') ? '#721c24' : '#155724',
+                        border: `1px solid ${submitMessage.includes('error') || submitMessage.includes('Failed') ? '#f5c6cb' : '#c3e6cb'}`,
+                        fontFamily: "'Outfit', sans-serif"
+                      }}>
+                        {submitMessage}
+                      </div>
+                    )}
+                    
                     <button 
                       type="submit"
                       className="tf-btn"
+                      disabled={isSubmitting}
+                      style={{ opacity: isSubmitting ? 0.7 : 1 }}
                     >
-                      Submit Application
+                      {isSubmitting ? 'Processing...' : 'Pay ₹150 & Submit Application'}
                     </button>
                   </form>
                 </div>
