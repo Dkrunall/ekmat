@@ -75,6 +75,54 @@ export default function SimpleMobileNav() {
             </li>
             <li className="nav-item">
               <Link 
+                className={`nav-link ${pathname === "/teachers" ? "active" : ""}`} 
+                href="/teachers"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const teachersSection = document.getElementById("teachers-section");
+                  if (teachersSection) {
+                    teachersSection.scrollIntoView({ behavior: "smooth" });
+                  } else {
+                    // If teachers section is not on current page, navigate to teachers page
+                    window.location.href = "/teachers";
+                  }
+                  // Close the offcanvas
+                  const offcanvas = document.getElementById('offcanvasMenu');
+                  if (offcanvas) {
+                    const bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvas);
+                    if (bsOffcanvas) bsOffcanvas.hide();
+                  }
+                }}
+              >
+                Teachers
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link 
+                className={`nav-link ${pathname === "/field-executive" ? "active" : ""}`} 
+                href="/field-executive"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const fieldExecutiveSection = document.getElementById("field-executive-section");
+                  if (fieldExecutiveSection) {
+                    fieldExecutiveSection.scrollIntoView({ behavior: "smooth" });
+                  } else {
+                    // If field executive section is not on current page, navigate to field executive page
+                    window.location.href = "/field-executive";
+                  }
+                  // Close the offcanvas
+                  const offcanvas = document.getElementById('offcanvasMenu');
+                  if (offcanvas) {
+                    const bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvas);
+                    if (bsOffcanvas) bsOffcanvas.hide();
+                  }
+                }}
+              >
+                Field Executive
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link 
                 className={`nav-link ${pathname === "/testimonials" ? "active" : ""}`} 
                 href="/testimonials"
                 onClick={(e) => {
