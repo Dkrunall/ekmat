@@ -21,12 +21,113 @@ export default function TeachersPage() {
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
+  const [fieldErrors, setFieldErrors] = useState({});
+
+  // Validation functions
+  const validateField = (name, value) => {
+    let error = '';
+    
+    switch (name) {
+      case 'fullName':
+      case 'fatherName':
+      case 'motherName':
+        if (!value.trim()) {
+          error = 'This field is required';
+        } else if (value.trim().length < 2) {
+          error = 'Name must be at least 2 characters long';
+        } else if (!/^[a-zA-Z\s]+$/.test(value.trim())) {
+          error = 'Name can only contain letters and spaces';
+        }
+        break;
+        
+      case 'email':
+        if (value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          error = 'Please enter a valid email address';
+        }
+        break;
+        
+      case 'nationality':
+        if (!value.trim()) {
+          error = 'Nationality is required';
+        } else if (!/^[a-zA-Z\s]+$/.test(value.trim())) {
+          error = 'Nationality can only contain letters and spaces';
+        }
+        break;
+        
+      case 'dob':
+        if (!value.trim()) {
+          error = 'Date of birth is required';
+        } else if (!/^\d{2}\/\d{2}\/\d{4}$/.test(value)) {
+          error = 'Please enter date in DD/MM/YYYY format';
+        } else {
+          const [day, month, year] = value.split('/');
+          const date = new Date(year, month - 1, day);
+          const today = new Date();
+          const age = today.getFullYear() - date.getFullYear();
+          
+          if (date.getDate() != day || date.getMonth() != month - 1 || date.getFullYear() != year) {
+            error = 'Please enter a valid date';
+          } else if (age < 24 || age > 45) {
+            error = 'Age must be between 24 and 45 years';
+          }
+        }
+        break;
+        
+      case 'age':
+        if (!value) {
+          error = 'Age is required';
+        } else if (isNaN(value) || value < 24 || value > 45) {
+          error = 'Age must be between 24 and 45 years';
+        }
+        break;
+        
+      case 'aadhaar':
+        if (!value.trim()) {
+          error = 'Aadhaar number is required';
+        } else if (!/^\d{12}$/.test(value.replace(/\s/g, ''))) {
+          error = 'Aadhaar number must be exactly 12 digits';
+        }
+        break;
+        
+      case 'gender':
+        if (!value) {
+          error = 'Please select your gender';
+        }
+        break;
+        
+      case 'maritalStatus':
+        if (!value) {
+          error = 'Please select your marital status';
+        }
+        break;
+        
+      case 'category':
+        if (!value) {
+          error = 'Please select your category';
+        }
+        break;
+        
+      default:
+        break;
+    }
+    
+    return error;
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    
+    // Update form data
     setFormData(prev => ({
       ...prev,
       [name]: value
+    }));
+    
+    // Validate field and update errors
+    const error = validateField(name, value);
+    setFieldErrors(prev => ({
+      ...prev,
+      [name]: error
     }));
   };
 
@@ -36,15 +137,37 @@ export default function TeachersPage() {
     setSubmitMessage('');
 
     try {
-      // Validate required fields
+      // Validate all fields
+      const newErrors = {};
       const requiredFields = ['fullName', 'nationality', 'fatherName', 'motherName', 'dob', 'age', 'aadhaar', 'gender', 'maritalStatus', 'category'];
-      const missingFields = requiredFields.filter(field => !formData[field]);
       
-      if (missingFields.length > 0) {
-        setSubmitMessage('Please fill in all required fields.');
+      // Check all fields for validation errors
+      Object.keys(formData).forEach(field => {
+        const error = validateField(field, formData[field]);
+        if (error) {
+          newErrors[field] = error;
+        }
+      });
+      
+      // Check for missing required fields
+      requiredFields.forEach(field => {
+        if (!formData[field] || !formData[field].toString().trim()) {
+          if (!newErrors[field]) {
+            newErrors[field] = 'This field is required';
+          }
+        }
+      });
+      
+      // If there are validation errors, show them and stop submission
+      if (Object.keys(newErrors).length > 0) {
+        setFieldErrors(newErrors);
+        setSubmitMessage('Please fix the errors below before submitting.');
         setIsSubmitting(false);
         return;
       }
+      
+      // Clear any previous errors
+      setFieldErrors({});
 
       // Initiate PhonePe payment
       const paymentResponse = await fetch('/api/phonepe-payment', {
@@ -290,8 +413,19 @@ export default function TeachersPage() {
                         value={formData.fullName}
                         onChange={handleInputChange}
                         required
-                        style={{ width: '100%', padding: '12px', borderRadius: '4px', border: '1px solid #ccc', fontFamily: "'Outfit', sans-serif" }}
+                        style={{ 
+                          width: '100%', 
+                          padding: '12px', 
+                          borderRadius: '4px', 
+                          border: fieldErrors.fullName ? '1px solid #dc3545' : '1px solid #ccc', 
+                          fontFamily: "'Outfit', sans-serif" 
+                        }}
                       />
+                      {fieldErrors.fullName && (
+                        <div style={{ color: '#dc3545', fontSize: '0.875rem', marginTop: '5px', fontFamily: "'Outfit', sans-serif" }}>
+                          {fieldErrors.fullName}
+                        </div>
+                      )}
                     </div>
                     
                     <div className="form-group mb-3">
@@ -302,8 +436,19 @@ export default function TeachersPage() {
                         placeholder="Email Address (Optional)"
                         value={formData.email}
                         onChange={handleInputChange}
-                        style={{ width: '100%', padding: '12px', borderRadius: '4px', border: '1px solid #ccc', fontFamily: "'Outfit', sans-serif" }}
+                        style={{ 
+                          width: '100%', 
+                          padding: '12px', 
+                          borderRadius: '4px', 
+                          border: fieldErrors.email ? '1px solid #dc3545' : '1px solid #ccc', 
+                          fontFamily: "'Outfit', sans-serif" 
+                        }}
                       />
+                      {fieldErrors.email && (
+                        <div style={{ color: '#dc3545', fontSize: '0.875rem', marginTop: '5px', fontFamily: "'Outfit', sans-serif" }}>
+                          {fieldErrors.email}
+                        </div>
+                      )}
                     </div>
                     
                     <div className="form-group mb-3">
@@ -315,8 +460,19 @@ export default function TeachersPage() {
                         value={formData.nationality}
                         onChange={handleInputChange}
                         required
-                        style={{ width: '100%', padding: '12px', borderRadius: '4px', border: '1px solid #ccc', fontFamily: "'Outfit', sans-serif" }}
+                        style={{ 
+                          width: '100%', 
+                          padding: '12px', 
+                          borderRadius: '4px', 
+                          border: fieldErrors.nationality ? '1px solid #dc3545' : '1px solid #ccc', 
+                          fontFamily: "'Outfit', sans-serif" 
+                        }}
                       />
+                      {fieldErrors.nationality && (
+                        <div style={{ color: '#dc3545', fontSize: '0.875rem', marginTop: '5px', fontFamily: "'Outfit', sans-serif" }}>
+                          {fieldErrors.nationality}
+                        </div>
+                      )}
                     </div>
                     
                     <div className="form-group mb-3">
@@ -328,8 +484,19 @@ export default function TeachersPage() {
                         value={formData.fatherName}
                         onChange={handleInputChange}
                         required
-                        style={{ width: '100%', padding: '12px', borderRadius: '4px', border: '1px solid #ccc', fontFamily: "'Outfit', sans-serif" }}
+                        style={{ 
+                          width: '100%', 
+                          padding: '12px', 
+                          borderRadius: '4px', 
+                          border: fieldErrors.fatherName ? '1px solid #dc3545' : '1px solid #ccc', 
+                          fontFamily: "'Outfit', sans-serif" 
+                        }}
                       />
+                      {fieldErrors.fatherName && (
+                        <div style={{ color: '#dc3545', fontSize: '0.875rem', marginTop: '5px', fontFamily: "'Outfit', sans-serif" }}>
+                          {fieldErrors.fatherName}
+                        </div>
+                      )}
                     </div>
                     
                     <div className="form-group mb-3">
@@ -341,8 +508,19 @@ export default function TeachersPage() {
                         value={formData.motherName}
                         onChange={handleInputChange}
                         required
-                        style={{ width: '100%', padding: '12px', borderRadius: '4px', border: '1px solid #ccc', fontFamily: "'Outfit', sans-serif" }}
+                        style={{ 
+                          width: '100%', 
+                          padding: '12px', 
+                          borderRadius: '4px', 
+                          border: fieldErrors.motherName ? '1px solid #dc3545' : '1px solid #ccc', 
+                          fontFamily: "'Outfit', sans-serif" 
+                        }}
                       />
+                      {fieldErrors.motherName && (
+                        <div style={{ color: '#dc3545', fontSize: '0.875rem', marginTop: '5px', fontFamily: "'Outfit', sans-serif" }}>
+                          {fieldErrors.motherName}
+                        </div>
+                      )}
                     </div>
                     
                     <div className="form-group mb-3">
@@ -354,8 +532,19 @@ export default function TeachersPage() {
                         value={formData.dob}
                         onChange={handleInputChange}
                         required
-                        style={{ width: '100%', padding: '12px', borderRadius: '4px', border: '1px solid #ccc', fontFamily: "'Outfit', sans-serif" }}
+                        style={{ 
+                          width: '100%', 
+                          padding: '12px', 
+                          borderRadius: '4px', 
+                          border: fieldErrors.dob ? '1px solid #dc3545' : '1px solid #ccc', 
+                          fontFamily: "'Outfit', sans-serif" 
+                        }}
                       />
+                      {fieldErrors.dob && (
+                        <div style={{ color: '#dc3545', fontSize: '0.875rem', marginTop: '5px', fontFamily: "'Outfit', sans-serif" }}>
+                          {fieldErrors.dob}
+                        </div>
+                      )}
                     </div>
                     
                     <div className="form-group mb-3">
@@ -367,8 +556,19 @@ export default function TeachersPage() {
                         value={formData.age}
                         onChange={handleInputChange}
                         required
-                        style={{ width: '100%', padding: '12px', borderRadius: '4px', border: '1px solid #ccc', fontFamily: "'Outfit', sans-serif" }}
+                        style={{ 
+                          width: '100%', 
+                          padding: '12px', 
+                          borderRadius: '4px', 
+                          border: fieldErrors.age ? '1px solid #dc3545' : '1px solid #ccc', 
+                          fontFamily: "'Outfit', sans-serif" 
+                        }}
                       />
+                      {fieldErrors.age && (
+                        <div style={{ color: '#dc3545', fontSize: '0.875rem', marginTop: '5px', fontFamily: "'Outfit', sans-serif" }}>
+                          {fieldErrors.age}
+                        </div>
+                      )}
                     </div>
                     
                     <div className="form-group mb-3">
@@ -380,8 +580,19 @@ export default function TeachersPage() {
                         value={formData.aadhaar}
                         onChange={handleInputChange}
                         required
-                        style={{ width: '100%', padding: '12px', borderRadius: '4px', border: '1px solid #ccc', fontFamily: "'Outfit', sans-serif" }}
+                        style={{ 
+                          width: '100%', 
+                          padding: '12px', 
+                          borderRadius: '4px', 
+                          border: fieldErrors.aadhaar ? '1px solid #dc3545' : '1px solid #ccc', 
+                          fontFamily: "'Outfit', sans-serif" 
+                        }}
                       />
+                      {fieldErrors.aadhaar && (
+                        <div style={{ color: '#dc3545', fontSize: '0.875rem', marginTop: '5px', fontFamily: "'Outfit', sans-serif" }}>
+                          {fieldErrors.aadhaar}
+                        </div>
+                      )}
                     </div>
                     
                     <div className="form-group mb-3">
@@ -391,13 +602,24 @@ export default function TeachersPage() {
                         value={formData.gender}
                         onChange={handleInputChange}
                         required
-                        style={{ width: '100%', padding: '12px', borderRadius: '4px', border: '1px solid #ccc', fontFamily: "'Outfit', sans-serif" }}
+                        style={{ 
+                          width: '100%', 
+                          padding: '12px', 
+                          borderRadius: '4px', 
+                          border: fieldErrors.gender ? '1px solid #dc3545' : '1px solid #ccc', 
+                          fontFamily: "'Outfit', sans-serif" 
+                        }}
                       >
                         <option value="">Gender *</option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                         <option value="other">Other</option>
                       </select>
+                      {fieldErrors.gender && (
+                        <div style={{ color: '#dc3545', fontSize: '0.875rem', marginTop: '5px', fontFamily: "'Outfit', sans-serif" }}>
+                          {fieldErrors.gender}
+                        </div>
+                      )}
                     </div>
                     
                     <div className="form-group mb-3">
@@ -407,7 +629,13 @@ export default function TeachersPage() {
                         value={formData.maritalStatus}
                         onChange={handleInputChange}
                         required
-                        style={{ width: '100%', padding: '12px', borderRadius: '4px', border: '1px solid #ccc', fontFamily: "'Outfit', sans-serif" }}
+                        style={{ 
+                          width: '100%', 
+                          padding: '12px', 
+                          borderRadius: '4px', 
+                          border: fieldErrors.maritalStatus ? '1px solid #dc3545' : '1px solid #ccc', 
+                          fontFamily: "'Outfit', sans-serif" 
+                        }}
                       >
                         <option value="">Marital Status *</option>
                         <option value="single">Single</option>
@@ -415,6 +643,11 @@ export default function TeachersPage() {
                         <option value="divorced">Divorced</option>
                         <option value="widowed">Widowed</option>
                       </select>
+                      {fieldErrors.maritalStatus && (
+                        <div style={{ color: '#dc3545', fontSize: '0.875rem', marginTop: '5px', fontFamily: "'Outfit', sans-serif" }}>
+                          {fieldErrors.maritalStatus}
+                        </div>
+                      )}
                     </div>
                     
                     <div className="form-group mb-4">
@@ -424,7 +657,13 @@ export default function TeachersPage() {
                         value={formData.category}
                         onChange={handleInputChange}
                         required
-                        style={{ width: '100%', padding: '12px', borderRadius: '4px', border: '1px solid #ccc', fontFamily: "'Outfit', sans-serif" }}
+                        style={{ 
+                          width: '100%', 
+                          padding: '12px', 
+                          borderRadius: '4px', 
+                          border: fieldErrors.category ? '1px solid #dc3545' : '1px solid #ccc', 
+                          fontFamily: "'Outfit', sans-serif" 
+                        }}
                       >
                         <option value="">Category *</option>
                         <option value="general">General</option>
@@ -433,6 +672,11 @@ export default function TeachersPage() {
                         <option value="st">ST</option>
                         <option value="ews">EWS</option>
                       </select>
+                      {fieldErrors.category && (
+                        <div style={{ color: '#dc3545', fontSize: '0.875rem', marginTop: '5px', fontFamily: "'Outfit', sans-serif" }}>
+                          {fieldErrors.category}
+                        </div>
+                      )}
                     </div>
                     
                     {submitMessage && (

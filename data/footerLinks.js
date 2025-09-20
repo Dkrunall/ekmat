@@ -5,6 +5,8 @@ export const menuItems = [
     links: [
       { name: "Home", href: "/" },
       { name: "About", href: "#about-section" },
+      { name: "Teachers", href: "/teachers" },
+      { name: "Field Executive", href: "/field-executive" },
       { name: "Testimonials", href: "#testimonials-section" },
       { name: "Contact us", href: "/contact" },
     ],

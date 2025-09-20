@@ -2,38 +2,10 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import emailjs from "@emailjs/browser";
-import { useRef, useState } from "react";
+
 import { menuItems, socialLinks } from "@/data/footerLinks";
 export default function Footer1({ parentClass = "footer" }) {
-  const formRef = useRef();
-  const [success, setSuccess] = useState(true);
-  const [showMessage, setShowMessage] = useState(false);
 
-  const handleShowMessage = () => {
-    setShowMessage(true);
-    setTimeout(() => {
-      setShowMessage(false);
-    }, 2000);
-  };
-
-  const sendMail = (e) => {
-    e.preventDefault();
-    emailjs
-      .sendForm("service_noj8796", "template_fs3xchn", formRef.current, {
-        publicKey: "iG4SCmR-YtJagQ4gV",
-      })
-      .then((res) => {
-        if (res.status === 200) {
-          setSuccess(true);
-          handleShowMessage();
-          formRef.current.reset();
-        } else {
-          setSuccess(false);
-          handleShowMessage();
-        }
-      });
-  };
 
   const handleScrollLink = (e, href) => {
     // Check if it's an anchor link
@@ -76,12 +48,7 @@ export default function Footer1({ parentClass = "footer" }) {
                           305 Shree Vardhan Complex, Indore, Madhya Pradesh
                         </p>
                       </li>
-                      <li className="flex gap-10 items-center">
-                        <div className="icon">
-                          <i className="flaticon-user" />
-                        </div>
-                        <p>Uma Choudhary</p>
-                      </li>
+
                       <li className="flex gap-10 items-center">
                         <div className="icon">
                           <i className="flaticon-call" />
@@ -129,53 +96,7 @@ export default function Footer1({ parentClass = "footer" }) {
                       </ul>
                     </div>
                   ))}
-                  <div
-                    className="footer-subscribe wow fadeInUp"
-                    data-wow-delay="0.5s"
-                  >
-                    <h5 className="fw-5">Subscribe</h5>
-                    <p>
-                      2000+ Our students are subscribe Around the World. Don't
-                      be shy introduce yourself!
-                    </p>
-                    <div
-                      className={`tfSubscribeMsg ${
-                        showMessage ? "active" : ""
-                      }`}
-                    >
-                      {success ? (
-                        <p style={{ color: "rgb(52, 168, 83)" }}>
-                          You have successfully subscribed.
-                        </p>
-                      ) : (
-                        <p style={{ color: "red" }}>Something went wrong</p>
-                      )}
-                    </div>
-                    <form
-                      className="form-subscribe style-line-bottom"
-                      onSubmit={sendMail}
-                      ref={formRef}
-                    >
-                      <fieldset className="email">
-                        <input
-                          type="email"
-                          placeholder="Your e-mail"
-                          className="style-default"
-                          name="email"
-                          tabIndex={2}
-                          defaultValue=""
-                          aria-required="true"
-                          required
-                        />
-                      </fieldset>
-                      <div className="button-submit">
-                        <button className="tf-btn-arrow" type="submit">
-                          Send
-                          <i className="icon-arrow-top-right" />
-                        </button>
-                      </div>
-                    </form>
-                  </div>
+
                 </div>
               </div>
             </div>

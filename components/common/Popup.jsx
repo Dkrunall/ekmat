@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 const Popup = () => {
   const [isVisible, setIsVisible] = useState(true);
@@ -27,9 +28,9 @@ const Popup = () => {
           <div className="popup-text">
             <h3>🎉 Welcome!</h3>
             <p>Join Ekmat Gyan Jyoti and start your journey with us.</p>
-            <button className="btn btn-primary" onClick={() => setIsVisible(false)}>
+            <Link href="/teachers" className="buttons" onClick={() => setIsVisible(false)}>
               Apply Now
-            </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -96,18 +97,18 @@ const Popup = () => {
           line-height: 1.6;
         }
         
-        .btn {
-          padding: 12px 24px;
+        .buttons {
+          padding: 24px 48px;
           border: none;
-          border-radius: 5px;
+          border-radius: 10px;
           cursor: pointer;
           font-weight: bold;
-          font-size: 1.1rem;
-        }
-        
-        .btn-primary {
-          background-color: #ff6b00;
+          font-size: 1.6rem;
+          min-width: 200px;
+          margin-top: 10px;
+          background-color: #ff6b00!important;
           color: white;
+          border: 1px solid #ff6b00;
         }
       `}</style>
     </div>

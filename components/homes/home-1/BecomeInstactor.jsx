@@ -1,84 +1,9 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function BecomeInstactor() {
-  const [isTeachingFormOpen, setIsTeachingFormOpen] = useState(false);
-  const [isPaymentProcessing, setIsPaymentProcessing] = useState(false);
-
-  const openTeachingForm = () => {
-    setIsTeachingFormOpen(true);
-  };
-
-  const closeTeachingForm = () => {
-    setIsTeachingFormOpen(false);
-    setIsPaymentProcessing(false);
-  };
-
-  const handleTeachingFormSubmit = async (e) => {
-    e.preventDefault();
-    // Get form data
-    const formData = new FormData(e.target);
-    const data = {
-      fullName: formData.get('fullName'),
-      email: formData.get('email'),
-      phone: formData.get('phone'),
-      experience: formData.get('experience'),
-      subjects: formData.get('subjects')
-    };
-
-    try {
-      console.log('Submitting instructor application:', data);
-      
-      // First, submit the form data to your backend
-      const response = await fetch('/api/instructor-application', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      console.log('Application submission response status:', response.status);
-      
-      // Check if the response is OK before trying to parse JSON
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('Application submission error text:', errorText);
-        throw new Error(`Server error: ${response.status} - ${errorText}`);
-      }
-
-      const responseData = await response.json();
-      console.log('Application submission response data:', responseData);
-
-      if (!responseData.success) {
-        // Handle specific error cases
-        if (responseData.error === 'Payment gateway authentication failed') {
-          throw new Error(`Payment gateway issue: ${responseData.details}`);
-        }
-        throw new Error(responseData.error || `Server error: ${response.status}`);
-      }
-
-      // After successful form submission, initiate PhonePe payment
-      if (responseData.paymentUrl) {
-        console.log('Redirecting to payment URL:', responseData.paymentUrl);
-        window.location.href = responseData.paymentUrl;
-      } else {
-        console.log('No payment URL in response, showing success message');
-        alert("Application submitted successfully! We'll contact you soon.");
-        closeTeachingForm();
-      }
-    } catch (error) {
-      console.error('Form submission error:', error);
-      alert(`Form submission failed: ${error.message || "Please try again."}`);
-      setIsPaymentProcessing(false);
-    }
-  };
-
-  const initiatePhonePePayment = async (userData) => {
-    // This function is no longer used since payment initiation is handled in the API route
-    console.log('initiatePhonePePayment function called - this should not happen');
-  };
 
   return (
     <section
@@ -146,20 +71,24 @@ export default function BecomeInstactor() {
                     </li>
                   </ul>
                   {/* Start Teaching Today Button */}
-                  <button 
+                  <Link 
+                    href="/teachers"
                     className="tf-btn style-secondary rounded-full"
-                    onClick={openTeachingForm}
                     style={{ 
                       borderRadius: '30px',
                       padding: '10px 20px',
                       fontSize: '14px',
                       border: 'none',
-                      cursor: 'pointer'
+                      cursor: 'pointer',
+                      textDecoration: 'none',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '8px'
                     }}
                   >
                     Start Teaching Today
                     <i className="icon-arrow-top-right" />
-                  </button>
+                  </Link>
                 </div>
               </div>
               <div className="content-img">
@@ -190,89 +119,7 @@ export default function BecomeInstactor() {
         </div>
       </div>
 
-      {/* Start Teaching Form Popup */}
-      {isTeachingFormOpen && (
-        <div className="teaching-popup-overlay">
-          <div className="teaching-popup">
-            <button 
-              onClick={closeTeachingForm}
-              className="close"
-            >
-              &times;
-            </button>
-            <h3>Start Teaching Today</h3>
-            <p className="subtitle">Join our platform and share your knowledge with thousands of students worldwide.</p>
-            <form onSubmit={handleTeachingFormSubmit}>
-              <div className="form-group">
-                <input 
-                  type="text" 
-                  id="fullName" 
-                  name="fullName" 
-                  placeholder="Full Name"
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <input 
-                  type="email" 
-                  id="email" 
-                  name="email" 
-                  placeholder="Email Address"
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <input 
-                  type="tel" 
-                  id="phone" 
-                  name="phone" 
-                  placeholder="Phone Number"
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <textarea 
-                  id="experience" 
-                  name="experience" 
-                  rows="4"
-                  placeholder="Teaching Experience"
-                  required
-                ></textarea>
-              </div>
-              <div className="form-group">
-                <textarea 
-                  id="subjects" 
-                  name="subjects" 
-                  rows="3"
-                  placeholder="Subjects You Want to Teach"
-                  required
-                ></textarea>
-              </div>
-              <button 
-                type="submit"
-                className="tf-btn"
-                disabled={isPaymentProcessing}
-              >
-                {isPaymentProcessing ? "Processing..." : "Submit Application"}
-              </button>
-            </form>
-            
-            {isPaymentProcessing && (
-              <div style={{ 
-                marginTop: '20px', 
-                padding: '15px', 
-                backgroundColor: '#e9f7ef', 
-                border: '1px solid #27ae60', 
-                borderRadius: '4px',
-                textAlign: 'center'
-              }}>
-                <p>Your application has been submitted successfully!</p>
-                <p>Redirecting to payment gateway to complete your registration (₹1)...</p>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
+
     </section>
   );
 }
